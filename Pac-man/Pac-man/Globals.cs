@@ -21,6 +21,8 @@ namespace Pac_man
         public static ContentManager contentManager = null;
         public static GraphicsDeviceManager graphics = null;
 
+        public static int test_variable = 1;
+
         public static EnStates currentState;
         public enum EnStates
         {

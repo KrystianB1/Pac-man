@@ -10,7 +10,6 @@ namespace Pac_man
 {
     class Menu : StateTemplate
     {
-
         Texture2D menutexture;
         Texture2D packman_right;
         Texture2D monster_red;
@@ -23,7 +22,10 @@ namespace Pac_man
         AnimatedSprite animated_monster_orange;
         AnimatedSprite animated_monster_cyan;
         AnimatedSprite animated_monster_pink;
-        Vector2 position = new Vector2(100,100);
+        Vector2 position = new Vector2(100,150);
+
+        float default_menu_spring_position = 0;
+
         private bool load;
         public Menu()
         {
@@ -45,8 +47,8 @@ namespace Pac_man
         }
         private enum menu_state  {
             PLAY_GAME,
-            SCORE
-       
+            SCORE,
+            QUIT
             }
 
         public override void Update(GameTime gameTime)
@@ -61,24 +63,23 @@ namespace Pac_man
         public override void Draw()
         {
             Globals.spriteBatch.Begin();
+             default_menu_spring_position = position.Y;
             Globals.spriteBatch.Draw(menutexture, new Rectangle(0, 0, 600, 600), Color.White);
             animated_packman_right.Draw(new Vector2(190, 100));
             animated_monster_red.Draw(new Vector2(220, 100));
             animated_monster_orange.Draw(new Vector2(260, 100));
             animated_monster_pink.Draw(new Vector2(300, 100));
             animated_monster_cyan.Draw(new Vector2(340, 100));
-       
+
+
                 foreach (menu_state get_string_menu in (menu_state[])Enum.GetValues(typeof(menu_state))) // to do poprawki jest bo dodaje cały czas z enuma a dziś juz nie myśle xd
                 {
-               
                     Globals.spriteBatch.DrawString(Globals.spriteFontMenu, get_string_menu.ToString(), position, Color.Red);
                     position.Y += Globals.spriteFontMenu.LineSpacing + 2;
-                    
                 }
-                
-                
-               
-            
+            position.Y = default_menu_spring_position;
+
+
             Globals.spriteBatch.End();
             
 
