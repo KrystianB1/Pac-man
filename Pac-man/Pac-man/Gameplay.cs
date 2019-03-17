@@ -9,6 +9,10 @@ namespace Pac_man
 {
     class Gameplay : StateTemplate
     {
+        public Gameplay( )
+        {
+
+        }
         public override void Draw()
         {
             throw new NotImplementedException();

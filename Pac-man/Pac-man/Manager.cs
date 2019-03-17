@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Pac_man
 {
-    class Manager
+    class Manager:Game1
     {
         private GameTime gameTime;
         Menu menu = new Menu();

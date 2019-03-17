@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Pac_man
 {
@@ -22,15 +23,28 @@ namespace Pac_man
         AnimatedSprite animated_monster_orange;
         AnimatedSprite animated_monster_cyan;
         AnimatedSprite animated_monster_pink;
-        Vector2 position = new Vector2(100,150);
+
+        Vector2 position = new Vector2(100, 150);
+
+        Color highLight = new Color(255, 211, 5);
+        Color normal = Color.Red;
+
+        KeyboardState keyboardState;
+        KeyboardState oldKeyboardState;
 
         float default_menu_spring_position = 0;
+        int selectedIndex;
+        static menu_state selectedItem;
+       
+        private bool CheckKey(Keys theKey)
+        {
+            return keyboardState.IsKeyUp(theKey) &&
+                oldKeyboardState.IsKeyDown(theKey);
+        }
 
-        private bool load;
         public Menu()
         {
-            load = true;
-            menutexture= Globals.contentManager.Load<Texture2D>("menuback");
+            menutexture = Globals.contentManager.Load<Texture2D>("menuback");
             packman_right = Globals.contentManager.Load<Texture2D>("pac");
 
             monster_red = Globals.contentManager.Load<Texture2D>("monster_red");
@@ -43,13 +57,14 @@ namespace Pac_man
             animated_monster_pink = new AnimatedSprite(monster_pink, 1, 2);
             animated_monster_orange = new AnimatedSprite(monster_orange, 1, 2);
             animated_monster_cyan = new AnimatedSprite(monster_cyan, 1, 2);
-            
+
         }
-        private enum menu_state  {
+        private enum menu_state
+        {
             PLAY_GAME,
             SCORE,
             QUIT
-            }
+        }
 
         public override void Update(GameTime gameTime)
         {
@@ -58,34 +73,69 @@ namespace Pac_man
             animated_monster_orange.Update();
             animated_monster_pink.Update();
             animated_monster_cyan.Update();
-            Draw();  
+
+            keyboardState = Keyboard.GetState();
+
+            if (CheckKey(Keys.Down))
+            {             
+                selectedIndex++;
+                if (selectedIndex == Enum.GetNames(typeof(menu_state)).Length)
+                    selectedIndex = 0;
+            }
+            if (CheckKey(Keys.Up))
+            {
+               
+                selectedIndex--;
+                if (selectedIndex < 0)
+                    selectedIndex = Enum.GetNames(typeof(menu_state)).Length - 1;
+            }
+
+            if (CheckKey(Keys.Enter) || CheckKey(Keys.Space))
+            {
+                switch (selectedItem)
+                {
+                    case menu_state.PLAY_GAME:
+                        Globals.currentState = Globals.EnStates.START;
+                        break;
+                    case menu_state.SCORE:
+                        Globals.currentState = Globals.EnStates.SCORE;
+                        break;
+                    case menu_state.QUIT:
+                        Globals.currentState = Globals.EnStates.EXIT;
+                        break;
+                }
+            }
+
+            oldKeyboardState = keyboardState;
+            Draw();
         }
         public override void Draw()
         {
             Globals.spriteBatch.Begin();
-             default_menu_spring_position = position.Y;
+            default_menu_spring_position = position.Y;
             Globals.spriteBatch.Draw(menutexture, new Rectangle(0, 0, 600, 600), Color.White);
             animated_packman_right.Draw(new Vector2(190, 100));
             animated_monster_red.Draw(new Vector2(220, 100));
             animated_monster_orange.Draw(new Vector2(260, 100));
             animated_monster_pink.Draw(new Vector2(300, 100));
             animated_monster_cyan.Draw(new Vector2(340, 100));
-
-
-                foreach (menu_state get_string_menu in (menu_state[])Enum.GetValues(typeof(menu_state))) // to do poprawki jest bo dodaje cały czas z enuma a dziś juz nie myśle xd
+            Color tint;
+            foreach (menu_state get_string_menu in (menu_state[])Enum.GetValues(typeof(menu_state))) 
+            {
+                if ((int)get_string_menu == selectedIndex)
                 {
-                    Globals.spriteBatch.DrawString(Globals.spriteFontMenu, get_string_menu.ToString(), position, Color.Red);
-                    position.Y += Globals.spriteFontMenu.LineSpacing + 2;
+                    tint = highLight;
+                    selectedItem = get_string_menu;
                 }
+                else
+                {
+                    tint = normal;
+                }
+                Globals.spriteBatch.DrawString(Globals.spriteFontMenu, get_string_menu.ToString(), position, tint);
+                position.Y += Globals.spriteFontMenu.LineSpacing + 2;
+            }
             position.Y = default_menu_spring_position;
-
-
             Globals.spriteBatch.End();
-            
-
-
         }
-
-        
     }
 }

@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace Pac_man
 {
-    abstract class StateTemplate
+   public abstract class StateTemplate
     {
-        abstract public void Update(GameTime gameTime);
         abstract public void Draw();
+        public abstract void Update(GameTime gameTime);
     }
+
 }

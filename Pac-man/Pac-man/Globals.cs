@@ -29,6 +29,7 @@ namespace Pac_man
             SPLASH,
             MENU,
             START,
+            SCORE,
             EXIT
         }
 
