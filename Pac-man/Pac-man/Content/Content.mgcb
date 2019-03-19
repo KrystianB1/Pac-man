@@ -32,6 +32,9 @@
 /processorParam:TextureFormat=Compressed
 /build:font.spritefont
 
+#begin Levels/lvl1.txt
+/copy:Levels/lvl1.txt
+
 #begin menuback.png
 /importer:TextureImporter
 /processor:TextureProcessor

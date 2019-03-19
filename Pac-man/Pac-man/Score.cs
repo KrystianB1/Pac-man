@@ -11,12 +11,12 @@ namespace Pac_man
     {
         public override void Draw()
         {
-            throw new NotImplementedException();
+           
         }
 
         public override void Update(GameTime gameTime)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
