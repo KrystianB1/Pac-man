@@ -17,7 +17,7 @@ namespace Pac_man
         string levels = "Content/Levels/lvl1.txt";
         public Gameplay( )
         {
-            Globals.graphics.GraphicsDevice.Clear(Color.Black);
+            //
             wall_1 = Globals.contentManager.Load<Texture2D>("1");
             loadlevels(levels);
         }
@@ -58,9 +58,16 @@ namespace Pac_man
                 Console.WriteLine(e.Message);
             }
         }
+
+        public override void Update(GameTime gameTime)
+        {
+            Draw();
+
+        }
         public override void Draw()
         {
-            
+
+            Globals.spriteBatch.GraphicsDevice.Clear(Color.Black);
             Globals.spriteBatch.Begin();
             for (int i=0;i<20;i++)
             {
@@ -75,10 +82,6 @@ namespace Pac_man
             Globals.spriteBatch.End();
         }
 
-        public override void Update(GameTime gameTime)
-        {
-            Draw();
-            Console.WriteLine(Globals.tile[1,1]);
-        }
+        
     }
 }

@@ -133,6 +133,7 @@ namespace Pac_man
                 }
                 Globals.spriteBatch.DrawString(Globals.spriteFontMenu, get_string_menu.ToString(), position, tint);
                 position.Y += Globals.spriteFontMenu.LineSpacing + 2;
+               
             }
             position.Y = default_menu_spring_position;
             Globals.spriteBatch.End();
