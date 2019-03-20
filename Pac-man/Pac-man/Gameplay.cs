@@ -5,18 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using System.IO;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Pac_man
 {
     class Gameplay : StateTemplate
     {
+
+        Texture2D wall_1;
         string[] line = new string[20];
         string levels = "Content/Levels/lvl1.txt";
         public Gameplay( )
         {
+            Globals.graphics.GraphicsDevice.Clear(Color.Black);
+            wall_1 = Globals.contentManager.Load<Texture2D>("1");
             loadlevels(levels);
-         
-
         }
         public void loadlevels(string url_levels)
         {
@@ -57,11 +60,24 @@ namespace Pac_man
         }
         public override void Draw()
         {
-            throw new NotImplementedException();
+            
+            Globals.spriteBatch.Begin();
+            for (int i=0;i<20;i++)
+            {
+                for(int j=0;j<20;j++)
+                {
+                    if (Globals.tile[i, j] == 1)
+                    {
+                        Globals.spriteBatch.Draw(wall_1,new Rectangle(i * 30, j * 30, 30, 30), Color.White);
+                    }
+                }
+            }
+            Globals.spriteBatch.End();
         }
 
         public override void Update(GameTime gameTime)
         {
+            Draw();
             Console.WriteLine(Globals.tile[1,1]);
         }
     }
