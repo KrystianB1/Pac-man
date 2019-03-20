@@ -12,13 +12,18 @@ namespace Pac_man
     class Gameplay : StateTemplate
     {
 
-        Texture2D wall_1;
+        Texture2D texture_0,texture_1,texture_2,texture_5,texture_6,texture_7,texture_pac;
         string[] line = new string[20];
         string levels = "Content/Levels/lvl1.txt";
         public Gameplay( )
         {
-            //
-            wall_1 = Globals.contentManager.Load<Texture2D>("1");
+            Globals.graphics.GraphicsDevice.Clear(Color.Black);
+            texture_0 = Globals.contentManager.Load<Texture2D>("0");
+            texture_1 = Globals.contentManager.Load<Texture2D>("1");
+            texture_2 = Globals.contentManager.Load<Texture2D>("2");
+            texture_6 = Globals.contentManager.Load<Texture2D>("6");
+            texture_7 = Globals.contentManager.Load<Texture2D>("7");
+            texture_pac = Globals.contentManager.Load<Texture2D>("pac");
             loadlevels(levels);
         }
         public void loadlevels(string url_levels)
@@ -58,30 +63,49 @@ namespace Pac_man
                 Console.WriteLine(e.Message);
             }
         }
-
-        public override void Update(GameTime gameTime)
-        {
-            Draw();
-
-        }
         public override void Draw()
         {
-
-            Globals.spriteBatch.GraphicsDevice.Clear(Color.Black);
+            
             Globals.spriteBatch.Begin();
             for (int i=0;i<20;i++)
             {
                 for(int j=0;j<20;j++)
                 {
-                    if (Globals.tile[i, j] == 1)
-                    {
-                        Globals.spriteBatch.Draw(wall_1,new Rectangle(i * 30, j * 30, 30, 30), Color.White);
-                    }
+                 switch(Globals.tile[j,i])
+                  {
+                   case 0:
+                            Globals.spriteBatch.Draw(texture_0, new Rectangle(i * 30, j * 30, 30, 30), Color.White);
+                            break;
+                   case 1:
+                            Globals.spriteBatch.Draw(texture_1,new Rectangle(i * 30, j * 30, 30, 30), Color.White);
+                            break;
+                   case 2:
+                            Globals.spriteBatch.Draw(texture_2, new Rectangle(i * 30, j * 30, 30, 30), Color.White);
+                            break;
+                   case 4:
+                            Globals.spriteBatch.Draw(texture_1, new Rectangle(i * 30, j * 30, 30, 30), Color.White);
+                            break;
+                   case 5:
+                            //Globals.spriteBatch.Draw(texture_pac, new Rectangle(i * 30, j * 30, 30, 30), Color.White);
+                            break;
+                   case 6:
+                            Globals.spriteBatch.Draw(texture_6,new Rectangle(i * 30, j * 30, 30, 30), Color.White);
+                            break;
+                   case 7:
+                            Globals.spriteBatch.Draw(texture_7, new Rectangle(i * 30, j * 30, 30, 30), Color.White);
+                            break;
+                            break;
+
+                                       }
                 }
             }
             Globals.spriteBatch.End();
         }
 
-        
+        public override void Update(GameTime gameTime)
+        {
+            Draw();
+            Console.WriteLine(Globals.tile[1,1]);
+        }
     }
 }
