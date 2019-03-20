@@ -23,7 +23,7 @@ namespace Pac_man
             texture_2 = Globals.contentManager.Load<Texture2D>("2");
             texture_6 = Globals.contentManager.Load<Texture2D>("6");
             texture_7 = Globals.contentManager.Load<Texture2D>("7");
-            texture_pac = Globals.contentManager.Load<Texture2D>("pac");
+            texture_pac = Globals.contentManager.Load<Texture2D>("monster/pac");
             loadlevels(levels);
         }
         public void loadlevels(string url_levels)
@@ -105,7 +105,7 @@ namespace Pac_man
         public override void Update(GameTime gameTime)
         {
             Draw();
-            Console.WriteLine(Globals.tile[1,1]);
+            
         }
     }
 }

@@ -45,12 +45,12 @@ namespace Pac_man
         public Menu()
         {
             menutexture = Globals.contentManager.Load<Texture2D>("menuback");
-            packman_right = Globals.contentManager.Load<Texture2D>("pac");
+            packman_right = Globals.contentManager.Load<Texture2D>("monster/pac");
 
-            monster_red = Globals.contentManager.Load<Texture2D>("monster_red");
-            monster_pink = Globals.contentManager.Load<Texture2D>("monster_pink");
-            monster_orange = Globals.contentManager.Load<Texture2D>("monster_orange");
-            monster_cyan = Globals.contentManager.Load<Texture2D>("monster_cyan");
+            monster_red = Globals.contentManager.Load<Texture2D>("monster/monster_red_right");
+            monster_pink = Globals.contentManager.Load<Texture2D>("monster/monster_pink_right");
+            monster_orange = Globals.contentManager.Load<Texture2D>("monster/monster_orange_right");
+            monster_cyan = Globals.contentManager.Load<Texture2D>("monster/monster_cyan_right");
 
             animated_packman_right = new AnimatedSprite(packman_right, 1, 3);
             animated_monster_red = new AnimatedSprite(monster_red, 1, 2);
@@ -133,7 +133,7 @@ namespace Pac_man
                 }
                 Globals.spriteBatch.DrawString(Globals.spriteFontMenu, get_string_menu.ToString(), position, tint);
                 position.Y += Globals.spriteFontMenu.LineSpacing + 2;
-               
+                
             }
             position.Y = default_menu_spring_position;
             Globals.spriteBatch.End();
