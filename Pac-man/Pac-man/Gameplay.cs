@@ -65,7 +65,7 @@ namespace Pac_man
         }
         public override void Draw()
         {
-            
+            Globals.spriteBatch.GraphicsDevice.Clear(Color.Black);
             Globals.spriteBatch.Begin();
             for (int i=0;i<20;i++)
             {

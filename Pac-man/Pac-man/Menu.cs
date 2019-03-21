@@ -111,6 +111,7 @@ namespace Pac_man
         }
         public override void Draw()
         {
+            Globals.spriteBatch.GraphicsDevice.Clear(Color.Black);
             Globals.spriteBatch.Begin();
             default_menu_spring_position = position.Y;
             Globals.spriteBatch.Draw(menutexture, new Rectangle(0, 0, 600, 600), Color.White);
