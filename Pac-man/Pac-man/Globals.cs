@@ -41,7 +41,7 @@ namespace Pac_man
         }
 
 
-        public static int[,] tile = new int[20, 20];  
+        public static int[,] tile = new int[34, 29];  
 
     }
 }

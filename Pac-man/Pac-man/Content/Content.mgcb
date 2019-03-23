@@ -131,6 +131,9 @@
 #begin Levels/lvl1.txt
 /copy:Levels/lvl1.txt
 
+#begin Levels/lvl2.txt
+/copy:Levels/lvl2.txt
+
 #begin menuback.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -346,6 +349,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:monster/pac.png
+
+#begin point.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:point.png
 
 #begin score/1600.png
 /importer:TextureImporter
