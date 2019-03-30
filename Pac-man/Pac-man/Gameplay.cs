@@ -26,7 +26,7 @@ namespace Pac_man
             texture_6 = Globals.contentManager.Load<Texture2D>("6");
             texture_7 = Globals.contentManager.Load<Texture2D>("7");
             texture_pac = Globals.contentManager.Load<Texture2D>("monster/pac");
-            loadlevels(levels);
+            loadlevels(levels_two);
         }
         public void loadlevels(string url_levels)
         {
@@ -85,9 +85,6 @@ namespace Pac_man
                             break;
                    case 2:
                             Globals.spriteBatch.Draw(texture_2, new Rectangle(i * 30, j * 30, 30, 30), Color.White);
-                            break;
-                   case 4:
-                            Globals.spriteBatch.Draw(texture_0, new Rectangle(i * 30, j * 30, 30, 30), Color.White);
                             break;
                    case 5:
                             //Globals.spriteBatch.Draw(texture_pac, new Rectangle(i * 30, j * 30, 30, 30), Color.White);
