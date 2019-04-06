@@ -14,6 +14,7 @@ namespace Pac_man
 
         Texture2D texture_0,texture_1,texture_2,texture_5,texture_6,texture_7,texture_pac,texture_point;
         string[] line = new string[20];
+        Rectangle location = new Rectangle();       
         string levels = "Content/Levels/lvl1.txt";
         string levels_two = "Content/Levels/lvl2.txt";
         public Gameplay( )
@@ -71,29 +72,35 @@ namespace Pac_man
         {
             Globals.spriteBatch.GraphicsDevice.Clear(Color.Black);
             Globals.spriteBatch.Begin();
+            location.Height = 30;
+            location.Width = 30;
             for (int i=0;i<28;i++)
             {
                 for(int j=0;j<31;j++)
                 {
+                    location.X = i * 30;
+                    location.Y = j * 30;
                  switch(Globals.tile[j,i])
                   {
                    case 0:
-                            Globals.spriteBatch.Draw(texture_1, new Rectangle(i * 30, j * 30, 30, 30), Color.White);
+                            Globals.spriteBatch.Draw(texture_1, location, Color.White);
+                            Globals.collisionList.Add(location);
                             break;
                    case 1:
-                            Globals.spriteBatch.Draw(texture_point, new Rectangle(i * 30, j * 30, 30, 30), Color.White);
+                            Globals.spriteBatch.Draw(texture_point, location, Color.White);
+                            Globals.pointsList.Add(location);
                             break;
                    case 2:
-                            Globals.spriteBatch.Draw(texture_2, new Rectangle(i * 30, j * 30, 30, 30), Color.White);
+                            Globals.spriteBatch.Draw(texture_2,location, Color.White);
                             break;
                    case 5:
                             //Globals.spriteBatch.Draw(texture_pac, new Rectangle(i * 30, j * 30, 30, 30), Color.White);
                             break;
                    case 6:
-                            Globals.spriteBatch.Draw(texture_6,new Rectangle(i * 30, j * 30, 30, 30), Color.White);
+                            Globals.spriteBatch.Draw(texture_6,location, Color.White);
                             break;
                    case 7:
-                            Globals.spriteBatch.Draw(texture_7, new Rectangle(i * 30, j * 30, 30, 30), Color.White);
+                            Globals.spriteBatch.Draw(texture_7,location, Color.White);
                             break;
                             break;
 

@@ -20,7 +20,8 @@ namespace Pac_man
         public static SpriteBatch spriteBatch = null;
         public static ContentManager contentManager = null;
         public static GraphicsDeviceManager graphics = null;
-
+        public static List<Rectangle> collisionList = new List<Rectangle>();
+        public static List<Rectangle> pointsList = new List<Rectangle>();
         public static int test_variable = 1;
 
         public static EnStates currentState;
