@@ -40,7 +40,6 @@ namespace Pac_man
             texture_6 = Globals.contentManager.Load<Texture2D>("6");
             texture_7 = Globals.contentManager.Load<Texture2D>("7");
             texture_pac = Globals.contentManager.Load<Texture2D>("monster/pac");
-            monster_red = Globals.contentManager.Load<Texture2D>("monster/monster_red_right");
             animated_packman_right = new AnimatedSprite(texture_pac, 1, 3);
             location = new Rectangle();
             line = new string[20];
@@ -94,7 +93,7 @@ namespace Pac_man
             if (Keyboard.GetState().IsKeyUp(keyUp))
             {
                 y--;
-                animated_packman_right = new AnimatedSprite(monster_red, 1, 3); // dla testu tylko , zeby sprwddzic podmienianie
+                
             }
             if (Keyboard.GetState().IsKeyDown(keyDown))
             {
