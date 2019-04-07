@@ -13,7 +13,7 @@ namespace Pac_man
     class Gameplay : StateTemplate
     {
 
-        Texture2D texture_0,texture_1,texture_2,texture_5,texture_6,texture_7,texture_pac,texture_point,monster_red;
+        Texture2D texture_0,texture_1,texture_2,texture_5,texture_6,texture_7,texture_pac,texture_point,texture_pac_up;
         string[] line;
         Rectangle location;
         Vector2 pac_man_bounds;
@@ -40,6 +40,7 @@ namespace Pac_man
             texture_6 = Globals.contentManager.Load<Texture2D>("6");
             texture_7 = Globals.contentManager.Load<Texture2D>("7");
             texture_pac = Globals.contentManager.Load<Texture2D>("monster/pac");
+            texture_pac_up = Globals.contentManager.Load<Texture2D>("monster/pac_up");
             animated_packman_right = new AnimatedSprite(texture_pac, 1, 3);
             location = new Rectangle();
             line = new string[20];
@@ -90,10 +91,12 @@ namespace Pac_man
             animated_packman_right.Update();
             pac_man_bounds = new Vector2(x,y);
             keyboardState = Keyboard.GetState();
-            if (Keyboard.GetState().IsKeyUp(keyUp))
+            if (Keyboard.GetState().IsKeyDown(keyUp))
             {
+                animated_packman_right += new AnimatedSprite(texture_pac_up, 1, 3);
                 y--;
                 
+
             }
             if (Keyboard.GetState().IsKeyDown(keyDown))
             {
@@ -103,7 +106,7 @@ namespace Pac_man
             if (Keyboard.GetState().IsKeyDown(keyRight))
             {
                 x++;
-
+                animated_packman_right = new AnimatedSprite(texture_pac, 1, 3);
             }
             if (Keyboard.GetState().IsKeyDown(keyLeft))
             {
