@@ -163,11 +163,7 @@ namespace Pac_man
             Globals.spriteBatch.End();
         }
 
-        private bool CheckKey(Keys theKey)
-        {
-            return keyboardState.IsKeyUp(theKey) &&
-                oldKeyboardState.IsKeyDown(theKey);
-        }
+       
 
     }
 }
