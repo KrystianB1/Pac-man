@@ -13,13 +13,13 @@ namespace Pac_man
     class Gameplay : StateTemplate
     {
 
-        Texture2D texture_0,texture_1,texture_2,texture_5,texture_6,texture_7,texture_pac,texture_point,texture_pac_up;
+        Texture2D texture_0,texture_1,texture_2,texture_5,texture_6,texture_7, texture_pac_right, texture_point,texture_pac_up;
         string[] line;
         Rectangle location;
         Vector2 pac_man_bounds;
         int x = 500;
         int y=500;
-        AnimatedSprite animated_packman_right;
+        AnimatedSprite animated_packman;
         KeyboardState keyboardState;
         KeyboardState oldKeyboardState;
         Keys keyRight = Keys.Right;
@@ -39,9 +39,9 @@ namespace Pac_man
             texture_2 = Globals.contentManager.Load<Texture2D>("2");
             texture_6 = Globals.contentManager.Load<Texture2D>("6");
             texture_7 = Globals.contentManager.Load<Texture2D>("7");
-            texture_pac = Globals.contentManager.Load<Texture2D>("monster/pac");
+            texture_pac_right = Globals.contentManager.Load<Texture2D>("monster/pac");
             texture_pac_up = Globals.contentManager.Load<Texture2D>("monster/pac_up");
-            animated_packman_right = new AnimatedSprite(texture_pac, 1, 3);
+            animated_packman = new AnimatedSprite(texture_pac_right, 1, 3);
             location = new Rectangle();
             line = new string[20];
             loadlevels(levels_two);
@@ -86,16 +86,19 @@ namespace Pac_man
        
         public override void Update(GameTime gameTime)
         {
-            
-            Draw();
-            animated_packman_right.Update();
+
+           
+            animated_packman.Update();
+            //check_animated();
             pac_man_bounds = new Vector2(x,y);
             keyboardState = Keyboard.GetState();
             if (Keyboard.GetState().IsKeyDown(keyUp))
             {
-                animated_packman_right += new AnimatedSprite(texture_pac_up, 1, 3);
+               
+                Globals.Animated_sprite = Globals.Animated_State.UP;
+                check_animated();
+                animated_packman.Update();
                 y--;
-                
 
             }
             if (Keyboard.GetState().IsKeyDown(keyDown))
@@ -105,8 +108,12 @@ namespace Pac_man
             }
             if (Keyboard.GetState().IsKeyDown(keyRight))
             {
+                Globals.Animated_sprite = Globals.Animated_State.RIGHT;
+                animated_packman.Update();
+                check_animated();
+             
                 x++;
-                animated_packman_right = new AnimatedSprite(texture_pac, 1, 3);
+                
             }
             if (Keyboard.GetState().IsKeyDown(keyLeft))
             {
@@ -119,7 +126,7 @@ namespace Pac_man
 
                 // do dopisania
             }
-
+            Draw();
         }
         public override void Draw()
         {
@@ -160,12 +167,32 @@ namespace Pac_man
                     }
                 }
             }
-            animated_packman_right.Draw(pac_man_bounds);
+            animated_packman.Draw(pac_man_bounds);
 
             Globals.spriteBatch.End();
         }
 
-       
+        public void check_animated()
+        {
+            switch (Globals.Animated_sprite)
+            {
+                case Globals.Animated_State.UP:
+                   animated_packman = new AnimatedSprite(texture_pac_up, 1, 3);
+
+                    break;
+                case Globals.Animated_State.DOWN:
+                  //  animated_packman = new AnimatedSprite(texture_pac_up, 1, 3);
+                    break;
+                case Globals.Animated_State.RIGHT:
+                    animated_packman = new AnimatedSprite(texture_pac_right, 1, 3);
+                    break;
+                case Globals.Animated_State.LEFT:
+                 //   animated_packman = new AnimatedSprite(texture_pac_up, 1, 3);
+                    break;
+
+            }
+        }
 
     }
+    
 }

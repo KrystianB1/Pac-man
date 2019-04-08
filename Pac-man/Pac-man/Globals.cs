@@ -25,6 +25,7 @@ namespace Pac_man
         public static int test_variable = 1;
 
         public static EnStates currentState;
+        public static Animated_State Animated_sprite;
         public enum EnStates
         {
             SPLASH,
@@ -32,6 +33,14 @@ namespace Pac_man
             START,
             SCORE,
             EXIT
+        }
+
+        public enum Animated_State {
+            RIGHT,
+            LEFT,
+            UP,
+            DOWN
+            
         }
 
 
