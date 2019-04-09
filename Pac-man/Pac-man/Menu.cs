@@ -45,7 +45,7 @@ namespace Pac_man
         public Menu()
         {
             menutexture = Globals.contentManager.Load<Texture2D>("menuback");
-            packman_right = Globals.contentManager.Load<Texture2D>("monster/pac");
+            packman_right = Globals.contentManager.Load<Texture2D>("monster/pac_right");
 
             monster_red = Globals.contentManager.Load<Texture2D>("monster/monster_red_right");
             monster_pink = Globals.contentManager.Load<Texture2D>("monster/monster_pink_right");
