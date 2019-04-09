@@ -338,6 +338,18 @@
 /processorParam:TextureFormat=Color
 /build:monster/monster_red_up.png
 
+#begin monster/pac_down.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:monster/pac_down.png
+
 #begin monster/pac_left.png
 /importer:TextureImporter
 /processor:TextureProcessor

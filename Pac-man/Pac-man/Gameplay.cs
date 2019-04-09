@@ -13,7 +13,7 @@ namespace Pac_man
     class Gameplay : StateTemplate
     {
 
-        Texture2D texture_0,texture_1,texture_2,texture_5,texture_6,texture_7, texture_pac_right, texture_point, texture_pac_up, texture_pac_left;
+        Texture2D texture_0,texture_1,texture_2,texture_5,texture_6,texture_7, texture_pac_right, texture_point, texture_pac_up, texture_pac_left,texture_pac_down;
         string[] line;
         Rectangle location;
         Vector2 pac_man_bounds;
@@ -28,7 +28,7 @@ namespace Pac_man
         Keys keyDown = Keys.Down;
         string levels = "Content/Levels/lvl1.txt";
         string levels_two = "Content/Levels/lvl2.txt";
-
+        Boolean block_key;
         public Gameplay( )
         {
             
@@ -42,7 +42,7 @@ namespace Pac_man
             texture_pac_right = Globals.contentManager.Load<Texture2D>("monster/pac_right");
             texture_pac_left = Globals.contentManager.Load<Texture2D>("monster/pac_left");
             texture_pac_up = Globals.contentManager.Load<Texture2D>("monster/pac_up");
-            
+            texture_pac_down = Globals.contentManager.Load<Texture2D>("monster/pac_down");
             animated_packman = new AnimatedSprite(texture_pac_right, 1, 3);
             location = new Rectangle();
             line = new string[20];
@@ -88,53 +88,8 @@ namespace Pac_man
        
         public override void Update(GameTime gameTime)
         {
+            controll();
            
-            animated_packman.Update();
-            pac_man_bounds = new Vector2(x,y);
-            keyboardState = Keyboard.GetState();
-
-            if (Keyboard.GetState().IsKeyDown(keyUp))
-            {
-               if(Globals.Animated_sprite!=Globals.Animated_State.UP)
-                {
-                    Globals.Animated_sprite = Globals.Animated_State.UP;
-                    check_animated();
-                }
-
-                y--;
-
-            }
-            if (Keyboard.GetState().IsKeyDown(keyDown))
-            {
-                if (Globals.Animated_sprite != Globals.Animated_State.DOWN)
-                {
-                    Globals.Animated_sprite = Globals.Animated_State.DOWN;
-                    check_animated();
-                }
-                y++;
-
-            }
-            if (Keyboard.GetState().IsKeyDown(keyRight))
-            {
-                if (Globals.Animated_sprite != Globals.Animated_State.RIGHT)
-                {
-                    Globals.Animated_sprite = Globals.Animated_State.RIGHT;
-                    check_animated();
-                }
-
-                x++;
-                
-            }
-            if (Keyboard.GetState().IsKeyDown(keyLeft))
-            {
-                if (Globals.Animated_sprite != Globals.Animated_State.LEFT)
-                {
-                    Globals.Animated_sprite = Globals.Animated_State.LEFT;
-                    check_animated();
-                }
-                x--;
-
-            }
 
             foreach (Rectangle r in Globals.pointsList)
             {
@@ -195,7 +150,7 @@ namespace Pac_man
                    animated_packman = new AnimatedSprite(texture_pac_up, 1, 3);
                     break;
                 case Globals.Animated_State.DOWN:
-                   animated_packman = new AnimatedSprite(texture_pac_up, 1, 3);
+                   animated_packman = new AnimatedSprite(texture_pac_down, 1, 3);
                     break;
                 case Globals.Animated_State.RIGHT:
                    animated_packman = new AnimatedSprite(texture_pac_right, 1, 3);
@@ -204,6 +159,62 @@ namespace Pac_man
                    animated_packman = new AnimatedSprite(texture_pac_left, 1, 3);
                     break;
 
+            }
+        }
+        public void controll()
+        {
+            block_key = true;
+            animated_packman.Update();
+            pac_man_bounds = new Vector2(x, y);
+            keyboardState = Keyboard.GetState();
+
+            if (Keyboard.GetState().IsKeyDown(keyUp)&& block_key == true)
+            {
+                block_key = false;
+                if (Globals.Animated_sprite != Globals.Animated_State.UP)
+                {
+                    Globals.Animated_sprite = Globals.Animated_State.UP;
+                    check_animated();
+                }
+                
+                y--;
+
+            }
+            if (Keyboard.GetState().IsKeyDown(keyDown) && block_key == true)
+            {
+                block_key = false;
+                if (Globals.Animated_sprite != Globals.Animated_State.DOWN)
+                {
+                    Globals.Animated_sprite = Globals.Animated_State.DOWN;
+                    check_animated();
+                }
+                y++;
+               
+
+            }
+            if (Keyboard.GetState().IsKeyDown(keyRight) && block_key == true)
+            {
+                block_key = false;
+                if (Globals.Animated_sprite != Globals.Animated_State.RIGHT)
+                {
+                    Globals.Animated_sprite = Globals.Animated_State.RIGHT;
+                    check_animated();
+                }
+
+                x++;
+               
+
+            }
+            if (Keyboard.GetState().IsKeyDown(keyLeft) && block_key == true)
+            {
+                block_key = false;
+                if (Globals.Animated_sprite != Globals.Animated_State.LEFT)
+                {
+                    Globals.Animated_sprite = Globals.Animated_State.LEFT;
+                    check_animated();
+                }
+                x--;
+                
             }
         }
 
