@@ -75,7 +75,6 @@ namespace Pac_man
                     {
                         
                         line = reader.ReadLine().Split(' ');
-                        Console.WriteLine(line.Length);
                         for(int column = 0; column < line.Length; column++)
                         {
                             try
@@ -105,11 +104,12 @@ namespace Pac_man
         {
             controll();
            
-
-            foreach (Rectangle r in Globals.pointsList)
+            
+            foreach (Rectangle r in Globals.collisionList)
             {
 
-                // do dopisania kolizje
+                
+
             }
             Draw();
         }
@@ -228,17 +228,7 @@ namespace Pac_man
                 position_X_pac--;
                 
             }
-             if (Keyboard.GetState().IsKeyDown(keyLeft) && block_key == true)
-            {
-                block_key = false;
-                if (Globals.Animated_sprite != Globals.Animated_State.LEFT)
-                {
-                    Globals.Animated_sprite = Globals.Animated_State.LEFT;
-                    check_animated();
-                }
-                position_X_pac--;
-                
-            }
+            
         }
 
     }
