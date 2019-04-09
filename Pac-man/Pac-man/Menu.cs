@@ -24,7 +24,7 @@ namespace Pac_man
         AnimatedSprite animated_monster_cyan;
         AnimatedSprite animated_monster_pink;
 
-        Vector2 position = new Vector2(100, 150);
+        Vector2 position = new Vector2(200, 150);
 
         Color highLight = new Color(255, 211, 5);
         Color normal = Color.Red;
