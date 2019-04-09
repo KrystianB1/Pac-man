@@ -17,8 +17,8 @@ namespace Pac_man
         string[] line;
         Rectangle location;
         Vector2 pac_man_bounds;
-        int x = 500;
-        int y=500;
+        int position_X_pac = 500;
+        int position_Y_pac=500;
         AnimatedSprite animated_packman;
         KeyboardState keyboardState;
         KeyboardState oldKeyboardState;
@@ -165,7 +165,7 @@ namespace Pac_man
         {
             block_key = true;
             animated_packman.Update();
-            pac_man_bounds = new Vector2(x, y);
+            pac_man_bounds = new Vector2(position_X_pac, position_Y_pac);
             keyboardState = Keyboard.GetState();
 
             if (Keyboard.GetState().IsKeyDown(keyUp)&& block_key == true)
@@ -177,7 +177,7 @@ namespace Pac_man
                     check_animated();
                 }
                 
-                y--;
+                position_Y_pac--;
 
             }
             if (Keyboard.GetState().IsKeyDown(keyDown) && block_key == true)
@@ -188,7 +188,7 @@ namespace Pac_man
                     Globals.Animated_sprite = Globals.Animated_State.DOWN;
                     check_animated();
                 }
-                y++;
+                position_Y_pac++;
                
 
             }
@@ -201,7 +201,7 @@ namespace Pac_man
                     check_animated();
                 }
 
-                x++;
+                position_X_pac++;
                
 
             }
@@ -213,7 +213,18 @@ namespace Pac_man
                     Globals.Animated_sprite = Globals.Animated_State.LEFT;
                     check_animated();
                 }
-                x--;
+                position_X_pac--;
+                
+            }
+             if (Keyboard.GetState().IsKeyDown(keyLeft) && block_key == true)
+            {
+                block_key = false;
+                if (Globals.Animated_sprite != Globals.Animated_State.LEFT)
+                {
+                    Globals.Animated_sprite = Globals.Animated_State.LEFT;
+                    check_animated();
+                }
+                position_X_pac--;
                 
             }
         }
