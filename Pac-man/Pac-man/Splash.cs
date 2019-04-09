@@ -19,7 +19,7 @@ namespace Pac_man
         {
             
             splash = Globals.contentManager.Load<Texture2D>("splash");
-            load = Globals.contentManager.Load<Texture2D>("bar");
+            load = Globals.contentManager.Load<Texture2D>("progess_bar");
 
 
         }

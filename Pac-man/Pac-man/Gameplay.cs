@@ -12,33 +12,48 @@ namespace Pac_man
 {
     class Gameplay : StateTemplate
     {
+        //Texture
+        Texture2D texture_wall;
+        Texture2D texture_gate;
+        Texture2D texture_in_gate;
+        Texture2D texture_portal;
+        Texture2D texture_pac_right;
+        Texture2D texture_point;
+        Texture2D texture_pac_up;
+        Texture2D texture_pac_left;
+        Texture2D texture_pac_down;
 
-        Texture2D texture_0,texture_1,texture_2,texture_5,texture_6,texture_7, texture_pac_right, texture_point, texture_pac_up, texture_pac_left,texture_pac_down;
-        string[] line;
+        //LOCATION
         Rectangle location;
         Vector2 pac_man_bounds;
+
+        //POSITION
         int position_X_pac = 500;
-        int position_Y_pac=500;
+        int position_Y_pac = 500;
         AnimatedSprite animated_packman;
+
+        //KEYBOARD
         KeyboardState keyboardState;
-        KeyboardState oldKeyboardState;
         Keys keyRight = Keys.Right;
         Keys keyLeft = Keys.Left;
         Keys keyUp = Keys.Up;
         Keys keyDown = Keys.Down;
+        Boolean block_key;
+
+        //LEVELS
         string levels = "Content/Levels/lvl1.txt";
         string levels_two = "Content/Levels/lvl2.txt";
-        Boolean block_key;
+        string[] line;
+
         public Gameplay( )
         {
             
             Globals.graphics.GraphicsDevice.Clear(Color.Black);
             texture_point = Globals.contentManager.Load<Texture2D>("point");
-            texture_0 = Globals.contentManager.Load<Texture2D>("0");
-            texture_1 = Globals.contentManager.Load<Texture2D>("1");
-            texture_2 = Globals.contentManager.Load<Texture2D>("2");
-            texture_6 = Globals.contentManager.Load<Texture2D>("6");
-            texture_7 = Globals.contentManager.Load<Texture2D>("7");
+            texture_wall = Globals.contentManager.Load<Texture2D>("wall");
+            texture_gate = Globals.contentManager.Load<Texture2D>("gate");
+            texture_in_gate = Globals.contentManager.Load<Texture2D>("in_gate");
+            texture_portal = Globals.contentManager.Load<Texture2D>("portal");
             texture_pac_right = Globals.contentManager.Load<Texture2D>("monster/pac_right");
             texture_pac_left = Globals.contentManager.Load<Texture2D>("monster/pac_left");
             texture_pac_up = Globals.contentManager.Load<Texture2D>("monster/pac_up");
@@ -94,7 +109,7 @@ namespace Pac_man
             foreach (Rectangle r in Globals.pointsList)
             {
 
-                // do dopisania
+                // do dopisania kolizje
             }
             Draw();
         }
@@ -113,7 +128,7 @@ namespace Pac_man
                     switch (Globals.tile[j, i])
                     {
                         case 0:
-                            Globals.spriteBatch.Draw(texture_1, location, Color.White);
+                            Globals.spriteBatch.Draw(texture_wall, location, Color.White);
                             Globals.collisionList.Add(location);
                             break;
                         case 1:
@@ -121,16 +136,13 @@ namespace Pac_man
                             Globals.pointsList.Add(location);
                             break;
                         case 2:
-                            Globals.spriteBatch.Draw(texture_2, location, Color.White);
-                            break;
-                        case 5:
-                            //Globals.spriteBatch.Draw(texture_pac, new Rectangle(i * 30, j * 30, 30, 30), Color.White);
+                            Globals.spriteBatch.Draw(texture_gate, location, Color.White);
                             break;
                         case 6:
-                            Globals.spriteBatch.Draw(texture_6, location, Color.White);
+                            Globals.spriteBatch.Draw(texture_in_gate, location, Color.White);
                             break;
                         case 7:
-                            Globals.spriteBatch.Draw(texture_7, location, Color.White);
+                            Globals.spriteBatch.Draw(texture_portal, location, Color.White);
                             break;
                             break;
 
