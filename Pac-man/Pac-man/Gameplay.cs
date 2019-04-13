@@ -26,10 +26,10 @@ namespace Pac_man
         //LOCATION
         Rectangle location;
         Vector2 pac_man_bounds;
-
+        Rectangle pacman_bounds;
         //POSITION
-        int position_X_pac = 500;
-        int position_Y_pac = 500;
+        int position_X_pac = 480;
+        int position_Y_pac = 480;
         AnimatedSprite animated_packman;
 
         //KEYBOARD
@@ -59,7 +59,9 @@ namespace Pac_man
             texture_pac_up = Globals.contentManager.Load<Texture2D>("monster/pac_up");
             texture_pac_down = Globals.contentManager.Load<Texture2D>("monster/pac_down");
             animated_packman = new AnimatedSprite(texture_pac_right, 1, 3);
+            pacman_bounds = new Rectangle();
             location = new Rectangle();
+            
             line = new string[20];
             loadlevels(levels_two);
         }
@@ -105,53 +107,60 @@ namespace Pac_man
             controll();
            
             
-            foreach (Rectangle r in Globals.collisionList)
-            {
-
-                
-
-            }
+  
             Draw();
         }
         public override void Draw()
         {
+
             Globals.spriteBatch.GraphicsDevice.Clear(Color.Black);
             Globals.spriteBatch.Begin();
             location.Height = 30;
             location.Width = 30;
-            for (int i = 0; i < 28; i++)
-            {
-                for (int j = 0; j < 31; j++)
-                {
-                    location.X = i * 30;
-                    location.Y = j * 30;
-                    switch (Globals.tile[j, i])
-                    {
-                        case 0:
-                            Globals.spriteBatch.Draw(texture_wall, location, Color.White);
-                            Globals.collisionList.Add(location);
-                            break;
-                        case 1:
-                            Globals.spriteBatch.Draw(texture_point, location, Color.White);
-                            Globals.pointsList.Add(location);
-                            break;
-                        case 2:
-                            Globals.spriteBatch.Draw(texture_gate, location, Color.White);
-                            break;
-                        case 6:
-                            Globals.spriteBatch.Draw(texture_in_gate, location, Color.White);
-                            break;
-                        case 7:
-                            Globals.spriteBatch.Draw(texture_portal, location, Color.White);
-                            break;
-                            break;
 
+                for (int i = 0; i < 28; i++)
+                {
+                    for (int j = 0; j < 31; j++)
+                    {
+                        location.X = i * 30;
+                        location.Y = j * 30;
+                        switch (Globals.tile[j, i])
+                        {
+                            case 0:
+                                Globals.spriteBatch.Draw(texture_wall, location, Color.White);
+                            if (Globals.mapdraw == false)
+                            {
+                                Globals.collisionList.Add(location);
+                            }
+                                break;
+                            case 1:
+                                Globals.spriteBatch.Draw(texture_point, location, Color.White);
+                            if (Globals.mapdraw == false)
+                            {
+                                Globals.pointsList.Add(location);
+                            }
+                                break;
+                            case 2:
+                                Globals.spriteBatch.Draw(texture_gate, location, Color.White);
+                                break;
+                            case 6:
+                                Globals.spriteBatch.Draw(texture_in_gate, location, Color.White);
+                                break;
+                            case 7:
+                                Globals.spriteBatch.Draw(texture_portal, location, Color.White);
+                                break;
+
+
+                        }
                     }
                 }
+            if (Globals.mapdraw == false)
+            {
+                Globals.mapdraw = true;
             }
             animated_packman.Draw(pac_man_bounds);
-
             Globals.spriteBatch.End();
+        
         }
 
         public void check_animated()
@@ -160,6 +169,7 @@ namespace Pac_man
             {
                 case Globals.Animated_State.UP:
                    animated_packman = new AnimatedSprite(texture_pac_up, 1, 3);
+                    
                     break;
                 case Globals.Animated_State.DOWN:
                    animated_packman = new AnimatedSprite(texture_pac_down, 1, 3);
@@ -178,6 +188,8 @@ namespace Pac_man
             block_key = true;
             animated_packman.Update();
             pac_man_bounds = new Vector2(position_X_pac, position_Y_pac);
+            pacman_bounds = new Rectangle(position_X_pac,position_Y_pac, 28, 28);
+            
             keyboardState = Keyboard.GetState();
 
             if (Keyboard.GetState().IsKeyDown(keyUp)&& block_key == true)
@@ -188,8 +200,19 @@ namespace Pac_man
                     Globals.Animated_sprite = Globals.Animated_State.UP;
                     check_animated();
                 }
-                
                 position_Y_pac--;
+                pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 28, 28);
+                foreach (Rectangle r in Globals.collisionList)
+                {
+                   if(r.Intersects(pacman_bounds))
+                    {
+                        position_Y_pac++;
+                        pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 28, 28);
+                        break;
+                    }
+                   
+                }
+                
 
             }
             if (Keyboard.GetState().IsKeyDown(keyDown) && block_key == true)
@@ -202,6 +225,15 @@ namespace Pac_man
                 }
                 position_Y_pac++;
                
+                foreach (Rectangle r in Globals.collisionList)
+                {
+                    if (r.Intersects(pacman_bounds))
+                    {
+                        position_Y_pac--;
+                        pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 28, 28);
+                        break;
+                    }
+                }
 
             }
             if (Keyboard.GetState().IsKeyDown(keyRight) && block_key == true)
@@ -214,7 +246,17 @@ namespace Pac_man
                 }
 
                 position_X_pac++;
-               
+                pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 28, 28);
+                foreach (Rectangle r in Globals.collisionList)
+                {
+                    if (r.Intersects(pacman_bounds))
+                    {
+                        position_X_pac--;
+                        pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 28, 28);
+                        break;
+                    }
+                }
+
 
             }
             if (Keyboard.GetState().IsKeyDown(keyLeft) && block_key == true)
@@ -226,7 +268,17 @@ namespace Pac_man
                     check_animated();
                 }
                 position_X_pac--;
-                
+                pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 28, 28);
+                foreach (Rectangle r in Globals.collisionList)
+                {
+                    if (r.Intersects(pacman_bounds))
+                    {
+                        position_X_pac++;
+                        pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 28, 28);
+                        break;
+                    }
+                }
+
             }
             
         }
