@@ -114,6 +114,7 @@ namespace Pac_man
         {
 
             Globals.spriteBatch.GraphicsDevice.Clear(Color.Black);
+            int index_for_score = 0;
             Globals.spriteBatch.Begin();
             location.Height = 30;
             location.Width = 30;
@@ -127,19 +128,35 @@ namespace Pac_man
                         switch (Globals.tile[j, i])
                         {
                             case 0:
-                                Globals.spriteBatch.Draw(texture_wall, location, Color.White);
+                            Globals.spriteBatch.Draw(texture_wall, location, Color.White);
                             if (Globals.mapdraw == false)
                             {
+                                Globals.spriteBatch.Draw(texture_wall, location, Color.White);
                                 Globals.collisionList.Add(location);
+                                index_for_score++;
                             }
+                           
                                 break;
                             case 1:
-                                Globals.spriteBatch.Draw(texture_point, location, Color.White);
+                                
                             if (Globals.mapdraw == false)
                             {
+                                Globals.spriteBatch.Draw(texture_point, location, Color.White);
                                 Globals.pointsList.Add(location);
                             }
-                                break;
+                            else
+                            {
+                                foreach (Rectangle rect in Globals.pointsList)
+                                {
+                                    if (rect.Contains(location))
+                                    {
+                                        Globals.spriteBatch.Draw(texture_point, location, Color.White);
+                                        break;
+                                    }
+                                }
+
+                            }
+                            break;
                             case 2:
                                 Globals.spriteBatch.Draw(texture_gate, location, Color.White);
                                 break;
@@ -209,8 +226,15 @@ namespace Pac_man
                         position_Y_pac++;
                         pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 28, 28);
                         break;
+                    }                  
+                }
+                foreach(Rectangle r in Globals.pointsList)
+                {
+                    if (pacman_bounds.Intersects(r))
+                    {
+                        Globals.pointsList.Remove(r);
+                        break;
                     }
-                   
                 }
                 
 
@@ -231,6 +255,14 @@ namespace Pac_man
                     {
                         position_Y_pac--;
                         pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 28, 28);
+                        break;
+                    }                 
+                }
+                foreach (Rectangle r in Globals.pointsList)
+                {
+                    if (pacman_bounds.Intersects(r))
+                    {
+                        Globals.pointsList.Remove(r);
                         break;
                     }
                 }
@@ -256,7 +288,14 @@ namespace Pac_man
                         break;
                     }
                 }
-
+                foreach (Rectangle r in Globals.pointsList)
+                {
+                    if (pacman_bounds.Intersects(r))
+                    {
+                        Globals.pointsList.Remove(r);
+                        break;
+                    }
+                }
 
             }
             if (Keyboard.GetState().IsKeyDown(keyLeft) && block_key == true)
@@ -275,6 +314,14 @@ namespace Pac_man
                     {
                         position_X_pac++;
                         pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 28, 28);
+                        break;
+                    }
+                }
+                foreach (Rectangle r in Globals.pointsList)
+                {
+                    if (pacman_bounds.Intersects(r))
+                    {
+                        Globals.pointsList.Remove(r);
                         break;
                     }
                 }
