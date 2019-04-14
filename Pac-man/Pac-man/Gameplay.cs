@@ -30,6 +30,11 @@ namespace Pac_man
         //POSITION
         int position_X_pac = 480;
         int position_Y_pac = 480;
+        const int velocity_X_pac = 3;
+        const int velocity_Y_pac = 3;
+        int index_for_score = 0;
+        
+
         AnimatedSprite animated_packman;
 
         //KEYBOARD
@@ -114,8 +119,9 @@ namespace Pac_man
         {
 
             Globals.spriteBatch.GraphicsDevice.Clear(Color.Black);
-            int index_for_score = 0;
+           
             Globals.spriteBatch.Begin();
+            
             location.Height = 30;
             location.Width = 30;
 
@@ -133,7 +139,7 @@ namespace Pac_man
                             {
                                 Globals.spriteBatch.Draw(texture_wall, location, Color.White);
                                 Globals.collisionList.Add(location);
-                                index_for_score++;
+                                
                             }
                            
                                 break;
@@ -176,6 +182,8 @@ namespace Pac_man
                 Globals.mapdraw = true;
             }
             animated_packman.Draw(pac_man_bounds);
+            Globals.spriteBatch.DrawString(Globals.spriteFontMenu, "Score: "+index_for_score.ToString(), new Vector2(0, 0), Color.White);
+
             Globals.spriteBatch.End();
         
         }
@@ -217,13 +225,14 @@ namespace Pac_man
                     Globals.Animated_sprite = Globals.Animated_State.UP;
                     check_animated();
                 }
-                position_Y_pac--;
+                position_Y_pac -= velocity_Y_pac ;
                 pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 28, 28);
                 foreach (Rectangle r in Globals.collisionList)
                 {
                    if(r.Intersects(pacman_bounds))
                     {
-                        position_Y_pac++;
+                        
+                        position_Y_pac +=velocity_Y_pac;
                         pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 28, 28);
                         break;
                     }                  
@@ -232,7 +241,9 @@ namespace Pac_man
                 {
                     if (pacman_bounds.Intersects(r))
                     {
+                        index_for_score += 10;
                         Globals.pointsList.Remove(r);
+
                         break;
                     }
                 }
@@ -247,13 +258,13 @@ namespace Pac_man
                     Globals.Animated_sprite = Globals.Animated_State.DOWN;
                     check_animated();
                 }
-                position_Y_pac++;
+                position_Y_pac+=velocity_Y_pac;
                
                 foreach (Rectangle r in Globals.collisionList)
                 {
                     if (r.Intersects(pacman_bounds))
                     {
-                        position_Y_pac--;
+                        position_Y_pac-=velocity_Y_pac;
                         pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 28, 28);
                         break;
                     }                 
@@ -262,6 +273,7 @@ namespace Pac_man
                 {
                     if (pacman_bounds.Intersects(r))
                     {
+                        index_for_score+=10;
                         Globals.pointsList.Remove(r);
                         break;
                     }
@@ -277,13 +289,13 @@ namespace Pac_man
                     check_animated();
                 }
 
-                position_X_pac++;
+                position_X_pac+=velocity_X_pac;
                 pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 28, 28);
                 foreach (Rectangle r in Globals.collisionList)
                 {
                     if (r.Intersects(pacman_bounds))
                     {
-                        position_X_pac--;
+                        position_X_pac-=velocity_X_pac;
                         pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 28, 28);
                         break;
                     }
@@ -292,7 +304,9 @@ namespace Pac_man
                 {
                     if (pacman_bounds.Intersects(r))
                     {
+                        index_for_score += 10;
                         Globals.pointsList.Remove(r);
+                        
                         break;
                     }
                 }
@@ -306,13 +320,13 @@ namespace Pac_man
                     Globals.Animated_sprite = Globals.Animated_State.LEFT;
                     check_animated();
                 }
-                position_X_pac--;
+                position_X_pac-=velocity_X_pac;
                 pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 28, 28);
                 foreach (Rectangle r in Globals.collisionList)
                 {
                     if (r.Intersects(pacman_bounds))
                     {
-                        position_X_pac++;
+                        position_X_pac+=velocity_X_pac;
                         pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 28, 28);
                         break;
                     }
@@ -321,6 +335,7 @@ namespace Pac_man
                 {
                     if (pacman_bounds.Intersects(r))
                     {
+                        index_for_score += 10;
                         Globals.pointsList.Remove(r);
                         break;
                     }
