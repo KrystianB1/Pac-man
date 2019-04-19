@@ -131,24 +131,32 @@ namespace Pac_man
                     {
                         location.X = i * 30;
                         location.Y = j * 30;
+          
                         switch (Globals.tile[j, i])
                         {
                             case 0:
                             Globals.spriteBatch.Draw(texture_wall, location, Color.White);
                             if (Globals.mapdraw == false)
                             {
+                                
                                 Globals.spriteBatch.Draw(texture_wall, location, Color.White);
                                 Globals.collisionList.Add(location);
-                                
+
                             }
                            
                                 break;
                             case 1:
-                                
+                            location.Width = 15;
+                            location.Height = 15;
+                            location.X = location.X + 7;
+                            location.Y = location.Y + 7;
                             if (Globals.mapdraw == false)
                             {
+                              
+                                
                                 Globals.spriteBatch.Draw(texture_point, location, Color.White);
                                 Globals.pointsList.Add(location);
+                                
                             }
                             else
                             {
@@ -156,12 +164,19 @@ namespace Pac_man
                                 {
                                     if (rect.Contains(location))
                                     {
+                                       
+                                      
                                         Globals.spriteBatch.Draw(texture_point, location, Color.White);
+                                       
                                         break;
                                     }
                                 }
 
                             }
+                            location.Width = 30;
+                            location.Height = 30;
+                            location.X = location.X - 7;
+                            location.Y = location.Y - 7;
                             break;
                             case 2:
                                 Globals.spriteBatch.Draw(texture_gate, location, Color.White);
