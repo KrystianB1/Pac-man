@@ -52,6 +52,7 @@ namespace Pac_man
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, (int)((float)width * 0.75), (int)((float)height * 0.75));
 
             Globals.spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White);
+            
         }
     }
 }
