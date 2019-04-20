@@ -33,7 +33,7 @@ namespace Pac_man
         int position_Y_pac = 480;
         const int velocity_X_pac = 3;
         const int velocity_Y_pac = 3;
-        int index_for_score = 0;
+        
         
 
 
@@ -183,7 +183,7 @@ namespace Pac_man
             {
                 Globals.mapdraw = true;
             }
-            Globals.spriteBatch.DrawString(Globals.spriteFontMenu, "Score: "+index_for_score.ToString(), new Vector2(0, 0), Color.White);
+            Globals.spriteBatch.DrawString(Globals.spriteFontMenu, "Score: "+Globals.index_for_score.ToString(), new Vector2(0, 0), Color.White);
             Globals.spriteBatch.End();
         
         }

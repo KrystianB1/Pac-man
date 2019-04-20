@@ -26,7 +26,7 @@ namespace Pac_man
         int position_Y_pac = 480;
         const int velocity_X_pac = 3;
         const int velocity_Y_pac = 3;
-        int index_for_score = 0;
+ 
 
         KeyboardState keyboardState;
         Keys keyRight = Keys.Right;
@@ -92,7 +92,7 @@ namespace Pac_man
                 {
                     if (pacman_bounds.Intersects(r))
                     {
-                        index_for_score += 10;
+                        Globals.index_for_score += 10;
                         Globals.pointsList.Remove(r);
 
                         break;
@@ -124,7 +124,7 @@ namespace Pac_man
                 {
                     if (pacman_bounds.Intersects(r))
                     {
-                        index_for_score += 10;
+                        Globals.index_for_score += 10;
                         Globals.pointsList.Remove(r);
                         break;
                     }
@@ -155,7 +155,7 @@ namespace Pac_man
                 {
                     if (pacman_bounds.Intersects(r))
                     {
-                        index_for_score += 10;
+                        Globals.index_for_score += 10;
                         Globals.pointsList.Remove(r);
 
                         break;
@@ -186,7 +186,7 @@ namespace Pac_man
                 {
                     if (pacman_bounds.Intersects(r))
                     {
-                        index_for_score += 10;
+                        Globals.index_for_score += 10;
                         Globals.pointsList.Remove(r);
                         break;
                     }

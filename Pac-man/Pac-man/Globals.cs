@@ -22,7 +22,7 @@ namespace Pac_man
         public static GraphicsDeviceManager graphics = null;
         public static List<Rectangle> collisionList = new List<Rectangle>();
         public static List<Rectangle> pointsList = new List<Rectangle>();
-        public static int test_variable = 1;
+        public static int index_for_score = 0;
         public static bool mapdraw = false;
         public static EnStates currentState;
         public static Animated_State Animated_sprite;
