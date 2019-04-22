@@ -64,7 +64,7 @@ namespace Pac_man
             block_key = true;
             animated_packman.Update();
             pac_man_bounds = new Vector2(position_X_pac, position_Y_pac);
-            pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 28, 28);
+            pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
 
             keyboardState = Keyboard.GetState();
 
@@ -77,14 +77,14 @@ namespace Pac_man
                     check_animated();
                 }
                 position_Y_pac -= velocity_Y_pac;
-                pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 28, 28);
+                pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
                 foreach (Rectangle r in Globals.collisionList)
                 {
                     if (r.Intersects(pacman_bounds))
                     {
 
                         position_Y_pac += velocity_Y_pac;
-                        pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 28, 28);
+                        pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
                         break;
                     }
                 }
@@ -116,7 +116,7 @@ namespace Pac_man
                     if (r.Intersects(pacman_bounds))
                     {
                         position_Y_pac -= velocity_Y_pac;
-                        pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 28, 28);
+                        pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
                         break;
                     }
                 }
@@ -141,13 +141,13 @@ namespace Pac_man
                 }
 
                 position_X_pac += velocity_X_pac;
-                pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 28, 28);
+                pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
                 foreach (Rectangle r in Globals.collisionList)
                 {
                     if (r.Intersects(pacman_bounds))
                     {
                         position_X_pac -= velocity_X_pac;
-                        pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 28, 28);
+                        pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
                         break;
                     }
                 }
@@ -182,13 +182,13 @@ namespace Pac_man
                     check_animated();
                 }
                 position_X_pac -= velocity_X_pac;
-                pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 28, 28);
+                pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
                 foreach (Rectangle r in Globals.collisionList)
                 {
                     if (r.Intersects(pacman_bounds))
                     {
                         position_X_pac += velocity_X_pac;
-                        pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 28, 28);
+                        pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
                         break;
                     }
                 }
@@ -212,7 +212,7 @@ namespace Pac_man
 
             }
             Globals.spriteBatch.Begin();
-            animated_packman.Draw(pac_man_bounds);
+            animated_packman.Draw_for_pacman(pac_man_bounds);
             Globals.spriteBatch.End();
         }
 

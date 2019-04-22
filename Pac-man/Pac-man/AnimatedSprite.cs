@@ -54,5 +54,19 @@ namespace Pac_man
             Globals.spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White);
             
         }
+
+        public void Draw_for_pacman(Vector2 location)
+        {
+            int width = 30;
+            int height = 30;
+            int row = (int)((float)currentFrame / (float)Columns);
+            int column = currentFrame % Columns;
+
+            Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width,height);
+
+            Globals.spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White);
+
+        }
     }
 }
