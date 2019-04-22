@@ -157,12 +157,22 @@ namespace Pac_man
                     {
                         Globals.index_for_score += 10;
                         Globals.pointsList.Remove(r);
+                        
+                        break;
+                    }
+                }
 
+                foreach (Rectangle r in Globals.portalsList)
+                {
+                    if (pacman_bounds.Intersects(r))
+                    {
+                        position_X_pac = 30;
                         break;
                     }
                 }
 
             }
+        
             if (Keyboard.GetState().IsKeyDown(keyLeft) && block_key == true)
             {
                 block_key = false;
@@ -188,6 +198,14 @@ namespace Pac_man
                     {
                         Globals.index_for_score += 10;
                         Globals.pointsList.Remove(r);
+                        break;
+                    }
+                }
+                foreach (Rectangle r in Globals.portalsList)
+                {
+                    if (pacman_bounds.Intersects(r))
+                    {
+                        position_X_pac = 540;                   
                         break;
                     }
                 }

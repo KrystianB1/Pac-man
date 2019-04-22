@@ -173,6 +173,7 @@ namespace Pac_man
                                 break;
                             case 7:
                                 Globals.spriteBatch.Draw(texture_portal, location, Color.White);
+                            Globals.portalsList.Add(location);
                                 break;
 
 
