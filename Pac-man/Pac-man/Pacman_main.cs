@@ -33,7 +33,7 @@ namespace Pac_man
         Keys keyLeft = Keys.Left;
         Keys keyUp = Keys.Up;
         Keys keyDown = Keys.Down;
-        Boolean block_key;
+        volatile Boolean block_key;
 
         public Pacman_main()
         {          
@@ -82,9 +82,9 @@ namespace Pac_man
                 {
                     if (r.Intersects(pacman_bounds))
                     {
-
-                        position_Y_pac += velocity_Y_pac;
                         pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
+                        position_Y_pac += velocity_Y_pac;
+
                         break;
                     }
                 }
@@ -110,6 +110,7 @@ namespace Pac_man
                     check_animated();
                 }
                 position_Y_pac += velocity_Y_pac;
+                pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
 
                 foreach (Rectangle r in Globals.collisionList)
                 {
@@ -126,6 +127,7 @@ namespace Pac_man
                     {
                         Globals.index_for_score += 10;
                         Globals.pointsList.Remove(r);
+
                         break;
                     }
                 }

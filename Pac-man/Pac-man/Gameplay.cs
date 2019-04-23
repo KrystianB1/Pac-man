@@ -34,11 +34,7 @@ namespace Pac_man
         const int velocity_X_pac = 3;
         const int velocity_Y_pac = 3;
         
-        
-
-
-
-
+       
 
         //LEVELS
         string levels = "Content/Levels/lvl1.txt";
