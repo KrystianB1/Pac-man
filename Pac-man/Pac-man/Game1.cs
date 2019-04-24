@@ -7,13 +7,17 @@ namespace Pac_man
    
     public class Game1 : Game
     {
+
         Manager manger;
+
+        bool isloadtomestep = true;
         public Game1()
         {
             Globals.currentState = Globals.EnStates.SPLASH;
             Globals.contentManager = Content;
             Globals.graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+           
         }
 
        
@@ -30,6 +34,7 @@ namespace Pac_man
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
+            isloadtomestep=false;
             Globals.spriteBatch = new SpriteBatch(GraphicsDevice);
             Globals.spriteFontMenu= Content.Load<SpriteFont>("font");
             manger = new Manager();
