@@ -21,6 +21,7 @@ namespace Pac_man
         public static ContentManager contentManager = null;
         public static GraphicsDeviceManager graphics = null;
         public static Color highLight = new Color(255, 211, 5);
+        public static Color normal = Color.Red;
         public static List<Rectangle> collisionList = new List<Rectangle>();
         public static List<Rectangle> pointsList = new List<Rectangle>();
         public static List<Rectangle> portalsList = new List<Rectangle>();
@@ -28,12 +29,16 @@ namespace Pac_man
         public static bool mapdraw = false;
         public static EnStates currentState;
         public static Animated_State Animated_sprite;
+        public static Retry_State retry_state;
+        public static menu_state selectedItem;
+
         public enum EnStates
         {
             SPLASH,
             MENU,
             START,
             SCORE,
+            RETRY,
             EXIT
         }
 
@@ -45,7 +50,18 @@ namespace Pac_man
             DOWN
         }
 
-
+        public enum Retry_State
+        {
+            RETRY,
+            SAVE,
+            QUIT
+        }
+        public enum menu_state
+        {
+            PLAY_GAME,
+            SCORE,
+            QUIT
+        }
         public enum enPowerUpType
         {
 

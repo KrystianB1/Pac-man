@@ -50,6 +50,7 @@
     <Compile Include="Pacman_main.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RetrySaveGame.cs" />
     <Compile Include="Score.cs" />
     <Compile Include="Splash.cs" />
     <Compile Include="StateTemplate.cs" />

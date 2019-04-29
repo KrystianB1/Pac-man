@@ -14,6 +14,7 @@ namespace Pac_man
         Splash splash = new Splash();
         Gameplay game = new Gameplay();
         Score score;
+        RetrySaveGame retry =new RetrySaveGame();
 
 
         public Manager()
@@ -40,6 +41,9 @@ namespace Pac_man
                     break;
                 case Globals.EnStates.EXIT:
                     Globals.exit = true;
+                    break;
+                case Globals.EnStates.RETRY:
+                    retry.Update(gameTime); 
                     break;
 
             }

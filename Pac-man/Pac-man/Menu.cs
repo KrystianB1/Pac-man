@@ -27,14 +27,13 @@ namespace Pac_man
         Vector2 position = new Vector2(200, 150);
 
 
-        Color normal = Color.Red;
+        
 
         KeyboardState keyboardState;
         KeyboardState oldKeyboardState;
 
         float default_menu_spring_position = 0;
         int selectedIndex;
-        static menu_state selectedItem;
 
         private bool CheckKey(Keys theKey)
         {
@@ -59,12 +58,7 @@ namespace Pac_man
             animated_monster_cyan = new AnimatedSprite(monster_cyan, 1, 2);
 
         }
-        private enum menu_state
-        {
-            PLAY_GAME,
-            SCORE,
-            QUIT
-        }
+        
 
         public override void Update(GameTime gameTime)
         {
@@ -79,7 +73,7 @@ namespace Pac_man
             if (CheckKey(Keys.Down))
             {
                 selectedIndex++;
-                if (selectedIndex == Enum.GetNames(typeof(menu_state)).Length)
+                if (selectedIndex == Enum.GetNames(typeof(Globals.menu_state)).Length)
                     selectedIndex = 0;
             }
             if (CheckKey(Keys.Up))
@@ -87,20 +81,20 @@ namespace Pac_man
 
                 selectedIndex--;
                 if (selectedIndex < 0)
-                    selectedIndex = Enum.GetNames(typeof(menu_state)).Length - 1;
+                    selectedIndex = Enum.GetNames(typeof(Globals.menu_state)).Length - 1;
             }
 
             if (CheckKey(Keys.Enter) || CheckKey(Keys.Space))
             {
-                switch (selectedItem)
+                switch (Globals.selectedItem)
                 {
-                    case menu_state.PLAY_GAME:
+                    case Globals.menu_state.PLAY_GAME:
                         Globals.currentState = Globals.EnStates.START;
                         break;
-                    case menu_state.SCORE:
+                    case Globals.menu_state.SCORE:
                         Globals.currentState = Globals.EnStates.SCORE;
                         break;
-                    case menu_state.QUIT:
+                    case Globals.menu_state.QUIT:
                         Globals.currentState = Globals.EnStates.EXIT;
                         break;
                 }
@@ -121,16 +115,16 @@ namespace Pac_man
             animated_monster_pink.Draw(new Vector2(300, 100));
             animated_monster_cyan.Draw(new Vector2(340, 100));
             Color tint;
-            foreach (menu_state get_string_menu in (menu_state[])Enum.GetValues(typeof(menu_state)))
+            foreach (Globals.menu_state get_string_menu in (Globals.menu_state[])Enum.GetValues(typeof(Globals.menu_state)))
             {
                 if ((int)get_string_menu == selectedIndex)
                 {
                     tint = Globals.highLight;
-                    selectedItem = get_string_menu;
+                    Globals.selectedItem = get_string_menu;
                 }
                 else
                 {
-                    tint = normal;
+                    tint = Globals.normal;
                 }
                 Globals.spriteBatch.DrawString(Globals.spriteFontMenu, get_string_menu.ToString(), position, tint);
                 position.Y += Globals.spriteFontMenu.LineSpacing + 2;

@@ -33,7 +33,10 @@ namespace Pac_man
         Keys keyLeft = Keys.Left;
         Keys keyUp = Keys.Up;
         Keys keyDown = Keys.Down;
+        Keys escape = Keys.Escape;
         volatile Boolean block_key;
+
+        public object MessageBoxButtons { get; private set; }
 
         public Pacman_main()
         {
@@ -213,10 +216,15 @@ namespace Pac_man
                 }
 
             }
-            Globals.spriteBatch.Begin();
+            if (Keyboard.GetState().IsKeyDown(escape))
+            {
+                Globals.currentState = Globals.EnStates.RETRY;
+            }
+                Globals.spriteBatch.Begin();
             animated_packman.Draw_for_pacman(pac_man_bounds);
             Globals.spriteBatch.End();
         }
+       
 
         public void check_animated()
         {
