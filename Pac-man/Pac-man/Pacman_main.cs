@@ -29,14 +29,9 @@ namespace Pac_man
 
 
         KeyboardState keyboardState;
-        Keys keyRight = Keys.Right;
-        Keys keyLeft = Keys.Left;
-        Keys keyUp = Keys.Up;
-        Keys keyDown = Keys.Down;
-        Keys escape = Keys.Escape;
+        
         volatile Boolean block_key;
 
-        public object MessageBoxButtons { get; private set; }
 
         public Pacman_main()
         {
@@ -71,7 +66,7 @@ namespace Pac_man
 
             keyboardState = Keyboard.GetState();
 
-            if (Keyboard.GetState().IsKeyDown(keyUp) && block_key == true)
+            if (Keyboard.GetState().IsKeyDown(Keys.Up) && block_key == true)
             {
                 block_key = false;
                 if (Globals.Animated_sprite != Globals.Animated_State.UP)
@@ -104,7 +99,7 @@ namespace Pac_man
 
 
             }
-            if (Keyboard.GetState().IsKeyDown(keyDown) && block_key == true)
+            if (Keyboard.GetState().IsKeyDown(Keys.Down) && block_key == true)
             {
                 block_key = false;
                 if (Globals.Animated_sprite != Globals.Animated_State.DOWN)
@@ -136,7 +131,7 @@ namespace Pac_man
                 }
 
             }
-            if (Keyboard.GetState().IsKeyDown(keyRight) && block_key == true)
+            if (Keyboard.GetState().IsKeyDown(Keys.Right) && block_key == true)
             {
                 block_key = false;
                 if (Globals.Animated_sprite != Globals.Animated_State.RIGHT)
@@ -178,7 +173,7 @@ namespace Pac_man
 
             }
 
-            if (Keyboard.GetState().IsKeyDown(keyLeft) && block_key == true)
+            if (Keyboard.GetState().IsKeyDown(Keys.Left) && block_key == true)
             {
                 block_key = false;
                 if (Globals.Animated_sprite != Globals.Animated_State.LEFT)
@@ -216,7 +211,7 @@ namespace Pac_man
                 }
 
             }
-            if (Keyboard.GetState().IsKeyDown(escape))
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 Globals.currentState = Globals.EnStates.RETRY;
             }

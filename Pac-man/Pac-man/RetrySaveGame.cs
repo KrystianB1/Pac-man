@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System.IO;
 
 namespace Pac_man
 {
@@ -12,10 +13,13 @@ namespace Pac_man
     {
        
         Vector2 position = new Vector2(250, 200);
+        Vector2 position_save_animated = new Vector2(200, 400);
         KeyboardState keyboardState;
         KeyboardState oldKeyboardState;
         int selectedIndex;
         float default_menu_spring_position = 0;
+        bool flaga ;
+        int licznik = 0;
 
         public override void Draw()
         {
@@ -39,6 +43,8 @@ namespace Pac_man
 
             }
             position.Y = default_menu_spring_position;
+           
+           
             Globals.spriteBatch.End();
         }
         private bool CheckKey(Keys theKey)
@@ -73,7 +79,7 @@ namespace Pac_man
                         Globals.currentState = Globals.EnStates.START;
                         break;
                     case Globals.Retry_State.SAVE:
-
+                        save_score();
                         break;
                     case Globals.Retry_State.QUIT:
                         Globals.currentState = Globals.EnStates.MENU;
@@ -83,6 +89,26 @@ namespace Pac_man
 
             oldKeyboardState = keyboardState;
             Draw();
+            
+        }
+        private void save_score()
+        {
+
+            using (StreamWriter sw = File.AppendText("Content/score/score_save.txt")) 
+        {
+                try
+                {
+                    if (Globals.index_for_score != 0)
+                    {
+                        sw.WriteLine(Globals.index_for_score);
+                    }
+                }catch(Exception e)
+                {
+                    throw new FileNotFoundException("Bład zapisu",e);
+                }
+               
+          
+        }	
             
         }
     }

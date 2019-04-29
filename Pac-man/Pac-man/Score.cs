@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.IO;
+using Microsoft.Xna.Framework.Input;
 
 namespace Pac_man
 {
@@ -21,13 +22,16 @@ namespace Pac_man
         private int count_score = 0;
         private int count_color = 0;
         private bool flaga = false;
-
         public Score()
         {
             load_score_from_file();
         }
         public override void Update(GameTime gameTime)
         {
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
+                Globals.currentState = Globals.EnStates.MENU;
+            }
             Draw();
 
         }
@@ -62,6 +66,7 @@ namespace Pac_man
             vec_for_draw_score.Y = default_position_score_Y;
             Globals.spriteBatch.End();
         }
+       
 
         private void load_score_from_file()
         {
