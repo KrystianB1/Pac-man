@@ -37,22 +37,23 @@ namespace Pac_man
             EXIT
         }
 
-        public enum Animated_State {
+        public enum Animated_State
+        {
             RIGHT,
             LEFT,
             UP,
-            DOWN 
+            DOWN
         }
 
 
         public enum enPowerUpType
         {
-            
+
             BONUS_POINT_GET_BALL
         }
 
 
-        public static int[,] tile = new int[34, 29];  
+        public static int[,] tile = new int[34, 29];
 
     }
 }

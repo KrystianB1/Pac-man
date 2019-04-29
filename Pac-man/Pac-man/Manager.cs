@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Pac_man
 {
-    class Manager:Game1
+    class Manager : Game1
     {
         private GameTime gameTime;
         Menu menu = new Menu();
@@ -35,7 +35,7 @@ namespace Pac_man
                     game.Update(gameTime);
                     break;
                 case Globals.EnStates.SCORE:
-                    score= new Score();
+                    score = new Score();
                     score.Update(gameTime);
                     break;
                 case Globals.EnStates.EXIT:

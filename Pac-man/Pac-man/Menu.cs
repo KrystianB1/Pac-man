@@ -26,7 +26,7 @@ namespace Pac_man
 
         Vector2 position = new Vector2(200, 150);
 
-        
+
         Color normal = Color.Red;
 
         KeyboardState keyboardState;
@@ -35,7 +35,7 @@ namespace Pac_man
         float default_menu_spring_position = 0;
         int selectedIndex;
         static menu_state selectedItem;
-       
+
         private bool CheckKey(Keys theKey)
         {
             return keyboardState.IsKeyUp(theKey) &&
@@ -77,14 +77,14 @@ namespace Pac_man
             keyboardState = Keyboard.GetState();
 
             if (CheckKey(Keys.Down))
-            {             
+            {
                 selectedIndex++;
                 if (selectedIndex == Enum.GetNames(typeof(menu_state)).Length)
                     selectedIndex = 0;
             }
             if (CheckKey(Keys.Up))
             {
-               
+
                 selectedIndex--;
                 if (selectedIndex < 0)
                     selectedIndex = Enum.GetNames(typeof(menu_state)).Length - 1;
@@ -121,7 +121,7 @@ namespace Pac_man
             animated_monster_pink.Draw(new Vector2(300, 100));
             animated_monster_cyan.Draw(new Vector2(340, 100));
             Color tint;
-            foreach (menu_state get_string_menu in (menu_state[])Enum.GetValues(typeof(menu_state))) 
+            foreach (menu_state get_string_menu in (menu_state[])Enum.GetValues(typeof(menu_state)))
             {
                 if ((int)get_string_menu == selectedIndex)
                 {
@@ -134,7 +134,7 @@ namespace Pac_man
                 }
                 Globals.spriteBatch.DrawString(Globals.spriteFontMenu, get_string_menu.ToString(), position, tint);
                 position.Y += Globals.spriteFontMenu.LineSpacing + 2;
-                
+
             }
             position.Y = default_menu_spring_position;
             Globals.spriteBatch.End();

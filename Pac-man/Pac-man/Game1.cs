@@ -56,8 +56,6 @@ namespace Pac_man
 
             }
             manger.Update();
-
-
             base.Update(gameTime);
         }
 

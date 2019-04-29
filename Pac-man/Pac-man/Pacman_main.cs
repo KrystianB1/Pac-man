@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Pac_man
 {
-   public class Pacman_main
+    public class Pacman_main
     {
         AnimatedSprite animated_packman;
 
@@ -26,7 +26,7 @@ namespace Pac_man
         int position_Y_pac = 480;
         const int velocity_X_pac = 3;
         const int velocity_Y_pac = 3;
- 
+
 
         KeyboardState keyboardState;
         Keys keyRight = Keys.Right;
@@ -36,7 +36,7 @@ namespace Pac_man
         volatile Boolean block_key;
 
         public Pacman_main()
-        {          
+        {
             texture_pac_right = Globals.contentManager.Load<Texture2D>("monster/pac_right");
             texture_pac_left = Globals.contentManager.Load<Texture2D>("monster/pac_left");
             texture_pac_up = Globals.contentManager.Load<Texture2D>("monster/pac_up");
@@ -48,7 +48,7 @@ namespace Pac_man
         }
 
         public void Update()
-        {          
+        {
             Draw();
         }
 
@@ -159,7 +159,7 @@ namespace Pac_man
                     {
                         Globals.index_for_score += 10;
                         Globals.pointsList.Remove(r);
-                        
+
                         break;
                     }
                 }
@@ -174,7 +174,7 @@ namespace Pac_man
                 }
 
             }
-        
+
             if (Keyboard.GetState().IsKeyDown(keyLeft) && block_key == true)
             {
                 block_key = false;
@@ -207,7 +207,7 @@ namespace Pac_man
                 {
                     if (pacman_bounds.Intersects(r))
                     {
-                        position_X_pac = 540;                   
+                        position_X_pac = 540;
                         break;
                     }
                 }
