@@ -33,25 +33,25 @@ namespace Pac_man
         int position_Y_pac = 480;
         const int velocity_X_pac = 3;
         const int velocity_Y_pac = 3;
-        
-       
+
+
 
         //LEVELS
         string levels = "Content/Levels/lvl1.txt";
         string levels_two = "Content/Levels/lvl2.txt";
         string[] line;
 
-        public Gameplay( )
+        public Gameplay()
         {
-            
+
             Globals.graphics.GraphicsDevice.Clear(Color.Black);
             texture_point = Globals.contentManager.Load<Texture2D>("point");
             texture_wall = Globals.contentManager.Load<Texture2D>("wall");
             texture_gate = Globals.contentManager.Load<Texture2D>("gate");
             texture_in_gate = Globals.contentManager.Load<Texture2D>("in_gate");
-            texture_portal = Globals.contentManager.Load<Texture2D>("portal");         
+            texture_portal = Globals.contentManager.Load<Texture2D>("portal");
             pacman = new Pacman_main();
-            
+
             line = new string[20];
             loadlevels(levels_two);
         }
@@ -62,27 +62,28 @@ namespace Pac_man
                 using (StreamReader reader = new StreamReader(url_levels))
                 {
                     int row = 0;
-                    
+
                     while (!reader.EndOfStream)
                     {
-                        
+
                         line = reader.ReadLine().Split(' ');
-                        for(int column = 0; column < line.Length; column++)
+                        for (int column = 0; column < line.Length; column++)
                         {
                             try
                             {
-                             Globals.tile[row, column] = Convert.ToInt32(line[column]);
-                            }catch(Exception e)
-                            {
-                                throw new FileLoadException("Blad wczytywania pliku",e); 
+                                Globals.tile[row, column] = Convert.ToInt32(line[column]);
                             }
-                          
+                            catch (Exception e)
+                            {
+                                throw new FileLoadException("Blad wczytywania pliku", e);
+                            }
+
                         }
-                       
+
                         row++;
 
                     }
-                   
+
                 }
             }
             catch (IOException e)
@@ -91,10 +92,10 @@ namespace Pac_man
                 Console.WriteLine(e.Message);
             }
         }
-       
+
         public override void Update(GameTime gameTime)
         {
-            
+
             Draw();
             pacman.Update();
         }
@@ -102,44 +103,44 @@ namespace Pac_man
         {
 
             Globals.spriteBatch.GraphicsDevice.Clear(Color.Black);
-           
+
             Globals.spriteBatch.Begin();
-            
+
             location.Height = 30;
             location.Width = 30;
 
-                for (int i = 0; i < 28; i++)
+            for (int i = 0; i < 28; i++)
+            {
+                for (int j = 0; j < 31; j++)
                 {
-                    for (int j = 0; j < 31; j++)
+                    location.X = i * 30;
+                    location.Y = j * 30;
+
+                    switch (Globals.tile[j, i])
                     {
-                        location.X = i * 30;
-                        location.Y = j * 30;
-          
-                        switch (Globals.tile[j, i])
-                        {
-                            case 0:
+                        case 0:
                             Globals.spriteBatch.Draw(texture_wall, location, Color.White);
                             if (Globals.mapdraw == false)
                             {
-                                
+
                                 Globals.spriteBatch.Draw(texture_wall, location, Color.White);
                                 Globals.collisionList.Add(location);
 
                             }
-                           
-                                break;
-                            case 1:
+
+                            break;
+                        case 1:
                             location.Width = 15;
                             location.Height = 15;
                             location.X = location.X + 7;
                             location.Y = location.Y + 7;
                             if (Globals.mapdraw == false)
                             {
-                              
-                                
+
+
                                 Globals.spriteBatch.Draw(texture_point, location, Color.White);
                                 Globals.pointsList.Add(location);
-                                
+
                             }
                             else
                             {
@@ -147,10 +148,10 @@ namespace Pac_man
                                 {
                                     if (rect.Contains(location))
                                     {
-                                       
-                                      
+
+
                                         Globals.spriteBatch.Draw(texture_point, location, Color.White);
-                                       
+
                                         break;
                                     }
                                 }
@@ -161,33 +162,33 @@ namespace Pac_man
                             location.X = location.X - 7;
                             location.Y = location.Y - 7;
                             break;
-                            case 2:
-                                Globals.spriteBatch.Draw(texture_gate, location, Color.White);
-                                break;
-                            case 6:
-                                Globals.spriteBatch.Draw(texture_in_gate, location, Color.White);
-                                break;
-                            case 7:
-                                Globals.spriteBatch.Draw(texture_portal, location, Color.White);
+                        case 2:
+                            Globals.spriteBatch.Draw(texture_gate, location, Color.White);
+                            break;
+                        case 6:
+                            Globals.spriteBatch.Draw(texture_in_gate, location, Color.White);
+                            break;
+                        case 7:
+                            Globals.spriteBatch.Draw(texture_portal, location, Color.White);
                             Globals.portalsList.Add(location);
-                                break;
+                            break;
 
 
-                        }
                     }
                 }
+            }
             if (Globals.mapdraw == false)
             {
                 Globals.mapdraw = true;
             }
-            Globals.spriteBatch.DrawString(Globals.spriteFontMenu, "Score: "+Globals.index_for_score.ToString(), new Vector2(0, 0), Color.White);
+            Globals.spriteBatch.DrawString(Globals.spriteFontMenu, "Score: " + Globals.index_for_score.ToString(), new Vector2(0, 0), Color.White);
             Globals.spriteBatch.End();
-        
+
         }
 
 
 
 
     }
-    
+
 }
