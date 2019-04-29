@@ -26,7 +26,7 @@ namespace Pac_man
 
         Vector2 position = new Vector2(200, 150);
 
-        Color highLight = new Color(255, 211, 5);
+        
         Color normal = Color.Red;
 
         KeyboardState keyboardState;
@@ -125,7 +125,7 @@ namespace Pac_man
             {
                 if ((int)get_string_menu == selectedIndex)
                 {
-                    tint = highLight;
+                    tint = Globals.highLight;
                     selectedItem = get_string_menu;
                 }
                 else

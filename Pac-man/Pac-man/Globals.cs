@@ -20,6 +20,7 @@ namespace Pac_man
         public static SpriteBatch spriteBatch = null;
         public static ContentManager contentManager = null;
         public static GraphicsDeviceManager graphics = null;
+        public static Color highLight = new Color(255, 211, 5);
         public static List<Rectangle> collisionList = new List<Rectangle>();
         public static List<Rectangle> pointsList = new List<Rectangle>();
         public static List<Rectangle> portalsList = new List<Rectangle>();
