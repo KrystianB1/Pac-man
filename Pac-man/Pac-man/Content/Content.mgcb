@@ -350,18 +350,6 @@
 /processorParam:TextureFormat=Color
 /build:point.png
 
-#begin point.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:point.png
-
 #begin portal.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -433,6 +421,9 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:score/800.png
+
+#begin score/score_save.txt
+/copy:score/score_save.txt
 
 #begin splash.jpg
 /importer:TextureImporter

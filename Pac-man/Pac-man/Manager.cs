@@ -13,7 +13,7 @@ namespace Pac_man
         Menu menu = new Menu();
         Splash splash = new Splash();
         Gameplay game = new Gameplay();
-        Score score = new Score();
+        Score score;
 
 
         public Manager()
@@ -35,6 +35,7 @@ namespace Pac_man
                     game.Update(gameTime);
                     break;
                 case Globals.EnStates.SCORE:
+                    score= new Score();
                     score.Update(gameTime);
                     break;
                 case Globals.EnStates.EXIT:
