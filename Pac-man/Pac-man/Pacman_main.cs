@@ -22,10 +22,11 @@ namespace Pac_man
         Vector2 pac_man_bounds;
         Rectangle pacman_bounds;
 
+
         int position_X_pac = 480;
         int position_Y_pac = 480;
-        const int velocity_X_pac = 3;
-        const int velocity_Y_pac = 3;
+        const int velocity_X_pac = 1;
+        const int velocity_Y_pac = 1;
 
 
         KeyboardState keyboardState;
@@ -63,43 +64,53 @@ namespace Pac_man
             animated_packman.Update();
             pac_man_bounds = new Vector2(position_X_pac, position_Y_pac);
             pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
+            if (Globals.test_up == 0 && Globals.test_down == 0 && Globals.test_left == 0 && Globals.test_right == 0)
+            {
+                keyboardState = Keyboard.GetState();
+            }
 
-            keyboardState = Keyboard.GetState();
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Up) && block_key == true)
+            if ((Keyboard.GetState().IsKeyDown(Keys.Up) && block_key == true) || Globals.test_up>0)
             {
                 block_key = false;
-                if (Globals.Animated_sprite != Globals.Animated_State.UP)
-                {
-                    Globals.Animated_sprite = Globals.Animated_State.UP;
-                    check_animated();
-                }
-                position_Y_pac -= velocity_Y_pac;
-                pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
-                foreach (Rectangle r in Globals.collisionList)
-                {
-                    if (r.Intersects(pacman_bounds))
+
+                    if (Globals.Animated_sprite != Globals.Animated_State.UP)
                     {
-                        pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
-                        position_Y_pac += velocity_Y_pac;
-
-                        break;
+                        Globals.Animated_sprite = Globals.Animated_State.UP;
+                        check_animated();
                     }
-                }
-                foreach (Rectangle r in Globals.pointsList)
-                {
-                    if (pacman_bounds.Intersects(r))
+
+                    position_Y_pac -= velocity_Y_pac;
+                    pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
+                    foreach (Rectangle r in Globals.collisionList)
                     {
-                        Globals.index_for_score += 10;
-                        Globals.pointsList.Remove(r);
+                        if (r.Intersects(pacman_bounds))
+                        {
+                            pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
+                            position_Y_pac += velocity_Y_pac;
 
-                        break;
+                            break;
+                        }
                     }
+                    foreach (Rectangle r in Globals.pointsList)
+                    {
+                        if (pacman_bounds.Intersects(r))
+                        {
+                            Globals.index_for_score += 10;
+                            Globals.pointsList.Remove(r);
+
+                            break;
+                        }
+                    }
+                    if(Globals.test_up<29)
+                {
+                    Globals.test_up++;
                 }
-
-
+                    else
+                {
+                    Globals.test_up = 0;
+                }
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Down) && block_key == true)
+            if ((Keyboard.GetState().IsKeyDown(Keys.Down) && block_key == true) || Globals.test_down > 0)
             {
                 block_key = false;
                 if (Globals.Animated_sprite != Globals.Animated_State.DOWN)
@@ -107,31 +118,39 @@ namespace Pac_man
                     Globals.Animated_sprite = Globals.Animated_State.DOWN;
                     check_animated();
                 }
-                position_Y_pac += velocity_Y_pac;
-                pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
+ 
+                    position_Y_pac += velocity_Y_pac;
+                    pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
 
-                foreach (Rectangle r in Globals.collisionList)
-                {
-                    if (r.Intersects(pacman_bounds))
+                    foreach (Rectangle r in Globals.collisionList)
                     {
-                        position_Y_pac -= velocity_Y_pac;
-                        pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
-                        break;
+                        if (r.Intersects(pacman_bounds))
+                        {
+                            position_Y_pac -= velocity_Y_pac;
+                            pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
+                            break;
+                        }
                     }
-                }
-                foreach (Rectangle r in Globals.pointsList)
-                {
-                    if (pacman_bounds.Intersects(r))
+                    foreach (Rectangle r in Globals.pointsList)
                     {
-                        Globals.index_for_score += 10;
-                        Globals.pointsList.Remove(r);
+                        if (pacman_bounds.Intersects(r))
+                        {
+                            Globals.index_for_score += 10;
+                            Globals.pointsList.Remove(r);
 
-                        break;
+                            break;
+                        }
                     }
+                if (Globals.test_down < 29)
+                {
+                    Globals.test_down++;
                 }
-
+                else
+                {
+                    Globals.test_down = 0;
+                }
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Right) && block_key == true)
+            if ((Keyboard.GetState().IsKeyDown(Keys.Right) && block_key == true) || Globals.test_right > 0)
             {
                 block_key = false;
                 if (Globals.Animated_sprite != Globals.Animated_State.RIGHT)
@@ -140,40 +159,46 @@ namespace Pac_man
                     check_animated();
                 }
 
-                position_X_pac += velocity_X_pac;
-                pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
-                foreach (Rectangle r in Globals.collisionList)
-                {
-                    if (r.Intersects(pacman_bounds))
+                    position_X_pac += velocity_X_pac;
+                    pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
+                    foreach (Rectangle r in Globals.collisionList)
                     {
-                        position_X_pac -= velocity_X_pac;
-                        pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
-                        break;
+                        if (r.Intersects(pacman_bounds))
+                        {
+                            position_X_pac -= velocity_X_pac;
+                            pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
+                            break;
+                        }
                     }
-                }
-                foreach (Rectangle r in Globals.pointsList)
-                {
-                    if (pacman_bounds.Intersects(r))
+                    foreach (Rectangle r in Globals.pointsList)
                     {
-                        Globals.index_for_score += 10;
-                        Globals.pointsList.Remove(r);
+                        if (pacman_bounds.Intersects(r))
+                        {
+                            Globals.index_for_score += 10;
+                            Globals.pointsList.Remove(r);
 
-                        break;
+                            break;
+                        }
                     }
-                }
 
-                foreach (Rectangle r in Globals.portalsList)
-                {
-                    if (pacman_bounds.Intersects(r))
+                    foreach (Rectangle r in Globals.portalsList)
                     {
-                        position_X_pac = 30;
-                        break;
+                        if (pacman_bounds.Intersects(r))
+                        {
+                            position_X_pac = 30;
+                            break;
+                        }
                     }
+                if (Globals.test_right < 29)
+                {
+                    Globals.test_right++;
                 }
-
+                else
+                {
+                    Globals.test_right = 0;
+                }
             }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Left) && block_key == true)
+            if ((Keyboard.GetState().IsKeyDown(Keys.Left) && block_key == true)  || Globals.test_left > 0)
             {
                 block_key = false;
                 if (Globals.Animated_sprite != Globals.Animated_State.LEFT)
@@ -181,35 +206,43 @@ namespace Pac_man
                     Globals.Animated_sprite = Globals.Animated_State.LEFT;
                     check_animated();
                 }
-                position_X_pac -= velocity_X_pac;
-                pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
-                foreach (Rectangle r in Globals.collisionList)
-                {
-                    if (r.Intersects(pacman_bounds))
-                    {
-                        position_X_pac += velocity_X_pac;
-                        pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
-                        break;
-                    }
-                }
-                foreach (Rectangle r in Globals.pointsList)
-                {
-                    if (pacman_bounds.Intersects(r))
-                    {
-                        Globals.index_for_score += 10;
-                        Globals.pointsList.Remove(r);
-                        break;
-                    }
-                }
-                foreach (Rectangle r in Globals.portalsList)
-                {
-                    if (pacman_bounds.Intersects(r))
-                    {
-                        position_X_pac = 540;
-                        break;
-                    }
-                }
 
+                    position_X_pac -= velocity_X_pac;
+                    pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
+                    foreach (Rectangle r in Globals.collisionList)
+                    {
+                        if (r.Intersects(pacman_bounds))
+                        {
+                            position_X_pac += velocity_X_pac;
+                            pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
+                            break;
+                        }
+                    }
+                    foreach (Rectangle r in Globals.pointsList)
+                    {
+                        if (pacman_bounds.Intersects(r))
+                        {
+                            Globals.index_for_score += 10;
+                            Globals.pointsList.Remove(r);
+                            break;
+                        }
+                    }
+                    foreach (Rectangle r in Globals.portalsList)
+                    {
+                        if (pacman_bounds.Intersects(r))
+                        {
+                            position_X_pac = 540;
+                            break;
+                        }
+                    }
+                if (Globals.test_left < 29)
+                {
+                    Globals.test_left++;
+                }
+                else
+                {
+                    Globals.test_left = 0;
+                }
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
