@@ -57,9 +57,9 @@ namespace Pac_man
             {
                 case 0:
                     //up
-                    if (Globals.Animated_sprite_cyan != Globals.Animated_State.UP)
+                    if (Globals.Animated_sprite_orange != Globals.Animated_State.UP)
                     {
-                        Globals.Animated_sprite_cyan = Globals.Animated_State.UP;
+                        Globals.Animated_sprite_orange = Globals.Animated_State.UP;
                         check_animated();
                     }
                     position_Y_pac -= velocity_Y_pac;
@@ -78,9 +78,9 @@ namespace Pac_man
                     break;
                 case 1:
                     //down
-                    if (Globals.Animated_sprite_cyan != Globals.Animated_State.DOWN)
+                    if (Globals.Animated_sprite_orange != Globals.Animated_State.DOWN)
                     {
-                        Globals.Animated_sprite_cyan = Globals.Animated_State.DOWN;
+                        Globals.Animated_sprite_orange = Globals.Animated_State.DOWN;
                         check_animated();
                     }
 
@@ -101,9 +101,9 @@ namespace Pac_man
                     break;
                 case 2:
                     //left
-                    if (Globals.Animated_sprite_cyan != Globals.Animated_State.LEFT)
+                    if (Globals.Animated_sprite_orange != Globals.Animated_State.LEFT)
                     {
-                        Globals.Animated_sprite_cyan = Globals.Animated_State.LEFT;
+                        Globals.Animated_sprite_orange = Globals.Animated_State.LEFT;
                         check_animated();
                     }
 
@@ -123,9 +123,9 @@ namespace Pac_man
                     break;
                 case 3:
                     //right
-                    if (Globals.Animated_sprite_cyan != Globals.Animated_State.RIGHT)
+                    if (Globals.Animated_sprite_orange != Globals.Animated_State.RIGHT)
                     {
-                        Globals.Animated_sprite_cyan = Globals.Animated_State.RIGHT;
+                        Globals.Animated_sprite_orange = Globals.Animated_State.RIGHT;
                         check_animated();
                     }
 
@@ -153,7 +153,7 @@ namespace Pac_man
 
         public void check_animated()
         {
-            switch (Globals.Animated_sprite_cyan)
+            switch (Globals.Animated_sprite_orange)
             {
                 case Globals.Animated_State.UP:
                     animated_orange = new AnimatedSprite(texture_orange_up, 1, 2);

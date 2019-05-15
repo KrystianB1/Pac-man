@@ -30,6 +30,7 @@ namespace Pac_man
         public static EnStates currentState;
         public static Animated_State Animated_sprite;
         public static Animated_State Animated_sprite_cyan;
+        public static Animated_State Animated_sprite_orange;
         public static Retry_State retry_state;
         public static menu_state selectedItem;
         public static int test_left = 0;
