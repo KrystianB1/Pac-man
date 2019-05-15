@@ -37,6 +37,7 @@ namespace Pac_man
         public static int test_up = 0;
         public static int test_down = 0;
         public static int cyan_movement_dir = 0;
+        public static int orange_movement_dir = 0;
         public enum EnStates
         {
             SPLASH,

@@ -8,36 +8,35 @@ using System.Threading.Tasks;
 
 namespace Pac_man
 {
-    public class Monster_cyan
+  public class Monster_orange
     {
-        AnimatedSprite animated_cyan;
+        AnimatedSprite animated_orange;
 
-        Texture2D texture_cyan_up;
-        Texture2D texture_cyan_left;
-        Texture2D texture_cyan_right;
-        Texture2D texture_cyan_down;
+        Texture2D texture_orange_up;
+        Texture2D texture_orange_left;
+        Texture2D texture_orange_right;
+        Texture2D texture_orange_down;
 
         Rectangle location;
-        Vector2 cyan_vector_bounds;
-        Rectangle cyan_bounds;
+        Vector2 orange_vector_bounds;
+        Rectangle orange_bounds;
 
-        int position_X_pac = 480;
+        int position_X_pac = 540;
         int position_Y_pac = 480;
         const int velocity_X_pac = 1;
         const int velocity_Y_pac = 1;
 
-        public Monster_cyan()
+        public Monster_orange()
         {
-            texture_cyan_right = Globals.contentManager.Load<Texture2D>("monster/monster_cyan_right");
-            texture_cyan_left = Globals.contentManager.Load<Texture2D>("monster/monster_cyan_left");
-            texture_cyan_up = Globals.contentManager.Load<Texture2D>("monster/monster_cyan_up");
-            texture_cyan_down = Globals.contentManager.Load<Texture2D>("monster/monster_cyan_down");
+            texture_orange_right = Globals.contentManager.Load<Texture2D>("monster/monster_orange_right");
+            texture_orange_left = Globals.contentManager.Load<Texture2D>("monster/monster_orange_left");
+            texture_orange_up = Globals.contentManager.Load<Texture2D>("monster/monster_orange_up");
+            texture_orange_down = Globals.contentManager.Load<Texture2D>("monster/monster_orange_down");
 
-            animated_cyan = new AnimatedSprite(texture_cyan_up, 1, 2);
-            cyan_bounds = new Rectangle();
+            animated_orange = new AnimatedSprite(texture_orange_up, 1, 2);
+            orange_bounds = new Rectangle();
             location = new Rectangle();
         }
-
         public void Update()
         {
             Draw();
@@ -50,11 +49,11 @@ namespace Pac_man
 
         public void controll()
         {
-            animated_cyan.Update();
-            cyan_vector_bounds = new Vector2(position_X_pac, position_Y_pac);
-            cyan_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
-           
-            switch (Globals.cyan_movement_dir)
+            animated_orange.Update();
+            orange_vector_bounds = new Vector2(position_X_pac, position_Y_pac);
+            orange_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
+
+            switch (Globals.orange_movement_dir)
             {
                 case 0:
                     //up
@@ -64,14 +63,14 @@ namespace Pac_man
                         check_animated();
                     }
                     position_Y_pac -= velocity_Y_pac;
-                    cyan_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
+                    orange_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
 
                     foreach (Rectangle r in Globals.collisionList)
                     {
-                        if (r.Intersects(cyan_bounds))
+                        if (r.Intersects(orange_bounds))
                         {
                             Random rnd = new Random();
-                            Globals.cyan_movement_dir = rnd.Next(0, 4);
+                            Globals.orange_movement_dir = rnd.Next(0, 4);
                             position_Y_pac += velocity_Y_pac;
                             break;
                         }
@@ -86,14 +85,14 @@ namespace Pac_man
                     }
 
                     position_Y_pac += velocity_Y_pac;
-                    cyan_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
+                    orange_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
 
                     foreach (Rectangle r in Globals.collisionList)
                     {
-                        if (r.Intersects(cyan_bounds))
+                        if (r.Intersects(orange_bounds))
                         {
                             Random rnd = new Random();
-                            Globals.cyan_movement_dir = rnd.Next(0, 4);
+                            Globals.orange_movement_dir = rnd.Next(0, 4);
                             position_Y_pac -= velocity_Y_pac;
                             break;
                         }
@@ -109,14 +108,14 @@ namespace Pac_man
                     }
 
                     position_X_pac -= velocity_X_pac;
-                    cyan_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
+                    orange_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
 
                     foreach (Rectangle r in Globals.collisionList)
                     {
-                        if (r.Intersects(cyan_bounds))
+                        if (r.Intersects(orange_bounds))
                         {
                             Random rnd = new Random();
-                            Globals.cyan_movement_dir = rnd.Next(0, 4);
+                            Globals.orange_movement_dir = rnd.Next(0, 4);
                             position_X_pac += velocity_X_pac;
                             break;
                         }
@@ -131,14 +130,14 @@ namespace Pac_man
                     }
 
                     position_X_pac += velocity_X_pac;
-                    cyan_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
+                    orange_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
 
                     foreach (Rectangle r in Globals.collisionList)
                     {
-                        if (r.Intersects(cyan_bounds))
+                        if (r.Intersects(orange_bounds))
                         {
                             Random rnd = new Random();
-                            Globals.cyan_movement_dir = rnd.Next(0, 4);
+                            Globals.orange_movement_dir = rnd.Next(0, 4);
                             position_X_pac -= velocity_X_pac;
                             break;
                         }
@@ -148,7 +147,7 @@ namespace Pac_man
                     break;
             }
             Globals.spriteBatch.Begin();
-            animated_cyan.Draw_for_pacman(cyan_vector_bounds);
+            animated_orange.Draw_for_pacman(orange_vector_bounds);
             Globals.spriteBatch.End();
         }
 
@@ -157,17 +156,17 @@ namespace Pac_man
             switch (Globals.Animated_sprite_cyan)
             {
                 case Globals.Animated_State.UP:
-                    animated_cyan = new AnimatedSprite(texture_cyan_up, 1, 2);
+                    animated_orange = new AnimatedSprite(texture_orange_up, 1, 2);
 
                     break;
                 case Globals.Animated_State.DOWN:
-                    animated_cyan = new AnimatedSprite(texture_cyan_down, 1, 2);
+                    animated_orange = new AnimatedSprite(texture_orange_down, 1, 2);
                     break;
                 case Globals.Animated_State.RIGHT:
-                    animated_cyan = new AnimatedSprite(texture_cyan_right, 1, 2);
+                    animated_orange = new AnimatedSprite(texture_orange_right, 1, 2);
                     break;
                 case Globals.Animated_State.LEFT:
-                    animated_cyan = new AnimatedSprite(texture_cyan_left, 1, 2);
+                    animated_orange = new AnimatedSprite(texture_orange_left, 1, 2);
                     break;
 
             }

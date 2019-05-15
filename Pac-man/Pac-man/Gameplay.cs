@@ -29,6 +29,8 @@ namespace Pac_man
         Rectangle pacman_bounds;
         Pacman_main pacman;
         Monster_cyan cyan;
+        Monster_orange orange;
+
         //POSITION
         int position_X_pac = 480;
         int position_Y_pac = 480;
@@ -53,6 +55,7 @@ namespace Pac_man
             texture_portal = Globals.contentManager.Load<Texture2D>("portal");
             pacman = new Pacman_main();
             cyan = new Monster_cyan();
+            orange = new Monster_orange();
 
             line = new string[20];
             loadlevels(levels_two);
@@ -101,6 +104,7 @@ namespace Pac_man
             Draw();
             pacman.Update();
             cyan.Update();
+            orange.Update();
 
         }
         public override void Draw()

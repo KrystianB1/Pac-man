@@ -48,6 +48,7 @@
     <Compile Include="Manager.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Monster_cyan.cs" />
+    <Compile Include="Monster_orange.cs" />
     <Compile Include="Pacman_main.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
