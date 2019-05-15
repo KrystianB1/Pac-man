@@ -29,12 +29,14 @@ namespace Pac_man
         public static bool mapdraw = false;
         public static EnStates currentState;
         public static Animated_State Animated_sprite;
+        public static Animated_State Animated_sprite_cyan;
         public static Retry_State retry_state;
         public static menu_state selectedItem;
         public static int test_left = 0;
         public static int test_right = 0;
         public static int test_up = 0;
         public static int test_down = 0;
+        public static int cyan_movement_dir = 0;
         public enum EnStates
         {
             SPLASH,

@@ -248,7 +248,7 @@ namespace Pac_man
             {
                 Globals.currentState = Globals.EnStates.RETRY;
             }
-                Globals.spriteBatch.Begin();
+            Globals.spriteBatch.Begin();
             animated_packman.Draw_for_pacman(pac_man_bounds);
             Globals.spriteBatch.End();
         }
