@@ -31,6 +31,8 @@ namespace Pac_man
         public static Animated_State Animated_sprite;
         public static Animated_State Animated_sprite_cyan;
         public static Animated_State Animated_sprite_orange;
+        public static Animated_State Animated_sprite_red;
+        public static Animated_State Animated_sprite_pink;
         public static Retry_State retry_state;
         public static menu_state selectedItem;
         public static int test_left = 0;
@@ -39,6 +41,8 @@ namespace Pac_man
         public static int test_down = 0;
         public static int cyan_movement_dir = 0;
         public static int orange_movement_dir = 0;
+        public static int red_movement_dir = 0;
+        public static int pink_movement_dir = 0;
         public enum EnStates
         {
             SPLASH,

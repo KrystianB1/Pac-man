@@ -30,6 +30,8 @@ namespace Pac_man
         Pacman_main pacman;
         Monster_cyan cyan;
         Monster_orange orange;
+        Monster_red red;
+        Monster_pink pink;
 
         //POSITION
         int position_X_pac = 480;
@@ -56,6 +58,8 @@ namespace Pac_man
             pacman = new Pacman_main();
             cyan = new Monster_cyan();
             orange = new Monster_orange();
+            red = new Monster_red();
+            pink = new Monster_pink();
 
             line = new string[20];
             loadlevels(levels_two);
@@ -105,6 +109,8 @@ namespace Pac_man
             pacman.Update();
             cyan.Update();
             orange.Update();
+            red.Update();
+            pink.Update();
 
         }
         public override void Draw()
