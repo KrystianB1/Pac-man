@@ -120,21 +120,22 @@ namespace Pac_man
         {
             if (pacman.Pacman_bounds.Intersects(cyan.Cyan_bounds))
             {
-                Console.WriteLine("Dupa");
+                
+                Globals.flaga_STOP = true;
             }
             else if(pacman.Pacman_bounds.Intersects(orange.Orange_bounds))
             {
-                Console.WriteLine("Dupa1");
+                Globals.flaga_STOP = true;
 
             }
             else if (pacman.Pacman_bounds.Intersects(red.Red_bounds))
             {
-                Console.WriteLine("Dupa2");
+                Globals.flaga_STOP = true;
 
             }
             else if (pacman.Pacman_bounds.Intersects(pink.Pink_bounds))
             {
-                Console.WriteLine("Dupa3");
+                Globals.flaga_STOP = true;
 
             }
         }

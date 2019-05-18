@@ -43,6 +43,7 @@ namespace Pac_man
         public static int orange_movement_dir = 0;
         public static int red_movement_dir = 0;
         public static int pink_movement_dir = 0;
+        public static bool flaga_STOP = false;
         public enum EnStates
         {
             SPLASH,

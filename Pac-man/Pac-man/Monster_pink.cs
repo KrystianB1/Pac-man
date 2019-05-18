@@ -67,99 +67,103 @@ namespace Pac_man
             animated_pink.Update();
             pink_vector_bounds = new Vector2(position_X_pac, position_Y_pac);
             pink_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
-
-            switch (Globals.pink_movement_dir)
+            if (Globals.flaga_STOP == false)
             {
-                case 0:
-                    //up
-                    if (Globals.Animated_sprite_pink != Globals.Animated_State.UP)
-                    {
-                        Globals.Animated_sprite_pink = Globals.Animated_State.UP;
-                        check_animated();
-                    }
-                    position_Y_pac -= velocity_Y_pac;
-                    pink_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
 
-                    foreach (Rectangle r in Globals.collisionList)
-                    {
-                        if (r.Intersects(pink_bounds))
+
+                switch (Globals.pink_movement_dir)
+                {
+                    case 0:
+                        //up
+                        if (Globals.Animated_sprite_pink != Globals.Animated_State.UP)
                         {
-                            Random rnd = new Random();
-                            Globals.pink_movement_dir = rnd.Next(0, 4);
-                            position_Y_pac += velocity_Y_pac;
-                            break;
+                            Globals.Animated_sprite_pink = Globals.Animated_State.UP;
+                            check_animated();
                         }
-                    }
-                    break;
-                case 1:
-                    //down
-                    if (Globals.Animated_sprite_pink != Globals.Animated_State.DOWN)
-                    {
-                        Globals.Animated_sprite_pink = Globals.Animated_State.DOWN;
-                        check_animated();
-                    }
+                        position_Y_pac -= velocity_Y_pac;
+                        pink_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
 
-                    position_Y_pac += velocity_Y_pac;
-                    pink_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
-
-                    foreach (Rectangle r in Globals.collisionList)
-                    {
-                        if (r.Intersects(pink_bounds))
+                        foreach (Rectangle r in Globals.collisionList)
                         {
-                            Random rnd = new Random();
-                            Globals.pink_movement_dir = rnd.Next(0, 4);
-                            position_Y_pac -= velocity_Y_pac;
-                            break;
+                            if (r.Intersects(pink_bounds))
+                            {
+                                Random rnd = new Random();
+                                Globals.pink_movement_dir = rnd.Next(0, 4);
+                                position_Y_pac += velocity_Y_pac;
+                                break;
+                            }
                         }
-                    }
-
-                    break;
-                case 2:
-                    //left
-                    if (Globals.Animated_sprite_pink != Globals.Animated_State.LEFT)
-                    {
-                        Globals.Animated_sprite_pink = Globals.Animated_State.LEFT;
-                        check_animated();
-                    }
-
-                    position_X_pac -= velocity_X_pac;
-                    pink_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
-
-                    foreach (Rectangle r in Globals.collisionList)
-                    {
-                        if (r.Intersects(pink_bounds))
+                        break;
+                    case 1:
+                        //down
+                        if (Globals.Animated_sprite_pink != Globals.Animated_State.DOWN)
                         {
-                            Random rnd = new Random();
-                            Globals.pink_movement_dir = rnd.Next(0, 4);
-                            position_X_pac += velocity_X_pac;
-                            break;
+                            Globals.Animated_sprite_pink = Globals.Animated_State.DOWN;
+                            check_animated();
                         }
-                    }
-                    break;
-                case 3:
-                    //right
-                    if (Globals.Animated_sprite_pink != Globals.Animated_State.RIGHT)
-                    {
-                        Globals.Animated_sprite_pink = Globals.Animated_State.RIGHT;
-                        check_animated();
-                    }
 
-                    position_X_pac += velocity_X_pac;
-                    pink_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
+                        position_Y_pac += velocity_Y_pac;
+                        pink_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
 
-                    foreach (Rectangle r in Globals.collisionList)
-                    {
-                        if (r.Intersects(pink_bounds))
+                        foreach (Rectangle r in Globals.collisionList)
                         {
-                            Random rnd = new Random();
-                            Globals.pink_movement_dir = rnd.Next(0, 4);
-                            position_X_pac -= velocity_X_pac;
-                            break;
+                            if (r.Intersects(pink_bounds))
+                            {
+                                Random rnd = new Random();
+                                Globals.pink_movement_dir = rnd.Next(0, 4);
+                                position_Y_pac -= velocity_Y_pac;
+                                break;
+                            }
                         }
-                    }
-                    break;
-                default:
-                    break;
+
+                        break;
+                    case 2:
+                        //left
+                        if (Globals.Animated_sprite_pink != Globals.Animated_State.LEFT)
+                        {
+                            Globals.Animated_sprite_pink = Globals.Animated_State.LEFT;
+                            check_animated();
+                        }
+
+                        position_X_pac -= velocity_X_pac;
+                        pink_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
+
+                        foreach (Rectangle r in Globals.collisionList)
+                        {
+                            if (r.Intersects(pink_bounds))
+                            {
+                                Random rnd = new Random();
+                                Globals.pink_movement_dir = rnd.Next(0, 4);
+                                position_X_pac += velocity_X_pac;
+                                break;
+                            }
+                        }
+                        break;
+                    case 3:
+                        //right
+                        if (Globals.Animated_sprite_pink != Globals.Animated_State.RIGHT)
+                        {
+                            Globals.Animated_sprite_pink = Globals.Animated_State.RIGHT;
+                            check_animated();
+                        }
+
+                        position_X_pac += velocity_X_pac;
+                        pink_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
+
+                        foreach (Rectangle r in Globals.collisionList)
+                        {
+                            if (r.Intersects(pink_bounds))
+                            {
+                                Random rnd = new Random();
+                                Globals.pink_movement_dir = rnd.Next(0, 4);
+                                position_X_pac -= velocity_X_pac;
+                                break;
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
             }
             Globals.spriteBatch.Begin();
             animated_pink.Draw_for_pacman(pink_vector_bounds);
