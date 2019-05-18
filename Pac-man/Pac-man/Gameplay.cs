@@ -118,10 +118,9 @@ namespace Pac_man
             if (pacman.Pacman_bounds.Intersects(cyan.Cyan_bounds)||
                 pacman.Pacman_bounds.Intersects(orange.Orange_bounds)|| 
                 pacman.Pacman_bounds.Intersects(red.Red_bounds)|| 
-                pacman.Pacman_bounds.Intersects(pink.Pink_bounds)){    
-
-               Globals.flaga_STOP = true;
-            }
+                pacman.Pacman_bounds.Intersects(pink.Pink_bounds))    
+                Globals.flaga_STOP = true;
+            
            
         }
 
