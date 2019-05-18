@@ -112,7 +112,34 @@ namespace Pac_man
             red.Update();
             pink.Update();
 
+
+
+            check_colision();
         }
+        public void check_colision()
+        {
+            if (pacman.Pacman_bounds.Intersects(cyan.Cyan_bounds))
+            {
+                Console.WriteLine("Dupa");
+            }
+            else if(pacman.Pacman_bounds.Intersects(orange.Orange_bounds))
+            {
+                Console.WriteLine("Dupa1");
+
+            }
+            else if (pacman.Pacman_bounds.Intersects(red.Red_bounds))
+            {
+                Console.WriteLine("Dupa2");
+
+            }
+            else if (pacman.Pacman_bounds.Intersects(pink.Pink_bounds))
+            {
+                Console.WriteLine("Dupa3");
+
+            }
+        }
+
+
         public override void Draw()
         {
 

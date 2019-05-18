@@ -26,6 +26,7 @@ namespace Pac_man
         const int velocity_X_pac = 1;
         const int velocity_Y_pac = 1;
 
+        
         public Monster_cyan()
         {
             texture_cyan_right = Globals.contentManager.Load<Texture2D>("monster/monster_cyan_right");
@@ -47,6 +48,19 @@ namespace Pac_man
         {
             controll();
         }
+        public Rectangle Cyan_bounds
+        {
+            get
+            {
+                return cyan_bounds;
+            }
+
+            set
+            {
+                cyan_bounds = value;
+            }
+        }
+
 
         public void controll()
         {

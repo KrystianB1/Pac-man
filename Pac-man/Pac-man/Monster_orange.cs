@@ -26,6 +26,8 @@ namespace Pac_man
         const int velocity_X_pac = 1;
         const int velocity_Y_pac = 1;
 
+        
+
         public Monster_orange()
         {
             texture_orange_right = Globals.contentManager.Load<Texture2D>("monster/monster_orange_right");
@@ -36,6 +38,18 @@ namespace Pac_man
             animated_orange = new AnimatedSprite(texture_orange_up, 1, 2);
             orange_bounds = new Rectangle();
             location = new Rectangle();
+        }
+        public Rectangle Orange_bounds
+        {
+            get
+            {
+                return orange_bounds;
+            }
+
+            set
+            {
+                orange_bounds = value;
+            }
         }
         public void Update()
         {

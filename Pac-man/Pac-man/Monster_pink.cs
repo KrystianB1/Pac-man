@@ -26,6 +26,7 @@ namespace Pac_man
         const int velocity_X_pac = 1;
         const int velocity_Y_pac = 1;
 
+       
         public Monster_pink()
         {
             texture_pink_right = Globals.contentManager.Load<Texture2D>("monster/monster_pink_right");
@@ -37,6 +38,19 @@ namespace Pac_man
             pink_bounds = new Rectangle();
             location = new Rectangle();
         }
+        public Rectangle Pink_bounds
+        {
+            get
+            {
+                return pink_bounds;
+            }
+
+            set
+            {
+                pink_bounds = value;
+            }
+        }
+
 
         public void Update()
         {

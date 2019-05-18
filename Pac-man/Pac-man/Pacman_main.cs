@@ -23,7 +23,7 @@ namespace Pac_man
         Rectangle pacman_bounds;
 
 
-        int position_X_pac = 480;
+        int position_X_pac = 50;
         int position_Y_pac = 480;
         const int velocity_X_pac = 1;
         const int velocity_Y_pac = 1;
@@ -33,6 +33,7 @@ namespace Pac_man
         
         volatile Boolean block_key;
 
+      
 
         public Pacman_main()
         {
@@ -46,6 +47,18 @@ namespace Pac_man
             location = new Rectangle();
         }
 
+        public Rectangle Pacman_bounds
+        {
+            get
+            {
+                return pacman_bounds;
+            }
+
+            set
+            {
+                pacman_bounds = value;
+            }
+        }
         public void Update()
         {
             Draw();
