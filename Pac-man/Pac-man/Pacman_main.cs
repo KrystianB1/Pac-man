@@ -17,6 +17,7 @@ namespace Pac_man
         Texture2D texture_pac_left;
         Texture2D texture_pac_right;
         Texture2D texture_pac_down;
+        Texture2D texture_pac_dead;
 
         Rectangle location;
         Vector2 pac_man_bounds;
@@ -41,6 +42,8 @@ namespace Pac_man
             texture_pac_left = Globals.contentManager.Load<Texture2D>("monster/pac_left");
             texture_pac_up = Globals.contentManager.Load<Texture2D>("monster/pac_up");
             texture_pac_down = Globals.contentManager.Load<Texture2D>("monster/pac_down");
+            texture_pac_dead = Globals.contentManager.Load<Texture2D>("monster/pac_dead");
+
 
             animated_packman = new AnimatedSprite(texture_pac_right, 1, 3);
             pacman_bounds = new Rectangle();
@@ -71,20 +74,22 @@ namespace Pac_man
 
         public void controll()
         {
-
-
+           
             block_key = true;
             animated_packman.Update();
             pac_man_bounds = new Vector2(position_X_pac, position_Y_pac);
             pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
-            if (Globals.test_up == 0 && Globals.test_down == 0 && Globals.test_left == 0 && Globals.test_right == 0)
-            {
-                keyboardState = Keyboard.GetState();
-            }
+            if (Globals.flaga_STOP == false)
+            { 
 
-            if ((Keyboard.GetState().IsKeyDown(Keys.Up) && block_key == true) || Globals.test_up>0)
-            {
-                block_key = false;
+                if (Globals.test_up == 0 && Globals.test_down == 0 && Globals.test_left == 0 && Globals.test_right == 0)
+                {
+                    keyboardState = Keyboard.GetState();
+                }
+
+                if ((Keyboard.GetState().IsKeyDown(Keys.Up) && block_key == true) || Globals.test_up > 0)
+                {
+                    block_key = false;
 
                     if (Globals.Animated_sprite != Globals.Animated_State.UP)
                     {
@@ -114,24 +119,24 @@ namespace Pac_man
                             break;
                         }
                     }
-                    if(Globals.test_up<29)
-                {
-                    Globals.test_up++;
-                }
+                    if (Globals.test_up < 29)
+                    {
+                        Globals.test_up++;
+                    }
                     else
-                {
-                    Globals.test_up = 0;
+                    {
+                        Globals.test_up = 0;
+                    }
                 }
-            }
-            if ((Keyboard.GetState().IsKeyDown(Keys.Down) && block_key == true) || Globals.test_down > 0)
-            {
-                block_key = false;
-                if (Globals.Animated_sprite != Globals.Animated_State.DOWN)
+                if ((Keyboard.GetState().IsKeyDown(Keys.Down) && block_key == true) || Globals.test_down > 0)
                 {
-                    Globals.Animated_sprite = Globals.Animated_State.DOWN;
-                    check_animated();
-                }
- 
+                    block_key = false;
+                    if (Globals.Animated_sprite != Globals.Animated_State.DOWN)
+                    {
+                        Globals.Animated_sprite = Globals.Animated_State.DOWN;
+                        check_animated();
+                    }
+
                     position_Y_pac += velocity_Y_pac;
                     pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
 
@@ -154,23 +159,23 @@ namespace Pac_man
                             break;
                         }
                     }
-                if (Globals.test_down < 29)
-                {
-                    Globals.test_down++;
+                    if (Globals.test_down < 29)
+                    {
+                        Globals.test_down++;
+                    }
+                    else
+                    {
+                        Globals.test_down = 0;
+                    }
                 }
-                else
+                if ((Keyboard.GetState().IsKeyDown(Keys.Right) && block_key == true) || Globals.test_right > 0)
                 {
-                    Globals.test_down = 0;
-                }
-            }
-            if ((Keyboard.GetState().IsKeyDown(Keys.Right) && block_key == true) || Globals.test_right > 0)
-            {
-                block_key = false;
-                if (Globals.Animated_sprite != Globals.Animated_State.RIGHT)
-                {
-                    Globals.Animated_sprite = Globals.Animated_State.RIGHT;
-                    check_animated();
-                }
+                    block_key = false;
+                    if (Globals.Animated_sprite != Globals.Animated_State.RIGHT)
+                    {
+                        Globals.Animated_sprite = Globals.Animated_State.RIGHT;
+                        check_animated();
+                    }
 
                     position_X_pac += velocity_X_pac;
                     pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
@@ -202,23 +207,23 @@ namespace Pac_man
                             break;
                         }
                     }
-                if (Globals.test_right < 29)
-                {
-                    Globals.test_right++;
+                    if (Globals.test_right < 29)
+                    {
+                        Globals.test_right++;
+                    }
+                    else
+                    {
+                        Globals.test_right = 0;
+                    }
                 }
-                else
+                if ((Keyboard.GetState().IsKeyDown(Keys.Left) && block_key == true) || Globals.test_left > 0)
                 {
-                    Globals.test_right = 0;
-                }
-            }
-            if ((Keyboard.GetState().IsKeyDown(Keys.Left) && block_key == true)  || Globals.test_left > 0)
-            {
-                block_key = false;
-                if (Globals.Animated_sprite != Globals.Animated_State.LEFT)
-                {
-                    Globals.Animated_sprite = Globals.Animated_State.LEFT;
-                    check_animated();
-                }
+                    block_key = false;
+                    if (Globals.Animated_sprite != Globals.Animated_State.LEFT)
+                    {
+                        Globals.Animated_sprite = Globals.Animated_State.LEFT;
+                        check_animated();
+                    }
 
                     position_X_pac -= velocity_X_pac;
                     pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
@@ -248,18 +253,34 @@ namespace Pac_man
                             break;
                         }
                     }
-                if (Globals.test_left < 29)
-                {
-                    Globals.test_left++;
+                    if (Globals.test_left < 29)
+                    {
+                        Globals.test_left++;
+                    }
+                    else
+                    {
+                        Globals.test_left = 0;
+                    }
                 }
-                else
+                if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 {
-                    Globals.test_left = 0;
+                    Globals.currentState = Globals.EnStates.RETRY;
+
                 }
+
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+            else
             {
-                Globals.currentState = Globals.EnStates.RETRY;
+                if (Globals.Animated_sprite != Globals.Animated_State.DEAD)
+                {
+                    Globals.Animated_sprite = Globals.Animated_State.DEAD;
+                    check_animated();
+
+                }
+                if (animated_packman.CurrentFrame == 9)
+                    Globals.currentState = Globals.EnStates.RETRY;
+                
+
             }
             Globals.spriteBatch.Begin();
             animated_packman.Draw_for_pacman(pac_man_bounds);
@@ -273,7 +294,6 @@ namespace Pac_man
             {
                 case Globals.Animated_State.UP:
                     animated_packman = new AnimatedSprite(texture_pac_up, 1, 3);
-
                     break;
                 case Globals.Animated_State.DOWN:
                     animated_packman = new AnimatedSprite(texture_pac_down, 1, 3);
@@ -283,6 +303,9 @@ namespace Pac_man
                     break;
                 case Globals.Animated_State.LEFT:
                     animated_packman = new AnimatedSprite(texture_pac_left, 1, 3);
+                    break;
+                case Globals.Animated_State.DEAD:
+                    animated_packman = new AnimatedSprite(texture_pac_dead, 1, 10);
                     break;
 
             }

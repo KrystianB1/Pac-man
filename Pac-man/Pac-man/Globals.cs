@@ -59,7 +59,8 @@ namespace Pac_man
             RIGHT,
             LEFT,
             UP,
-            DOWN
+            DOWN,
+            DEAD
         }
 
         public enum Retry_State

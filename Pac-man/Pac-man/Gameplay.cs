@@ -111,33 +111,18 @@ namespace Pac_man
             orange.Update();
             red.Update();
             pink.Update();
-
-
-
             check_colision();
         }
         public void check_colision()
         {
-            if (pacman.Pacman_bounds.Intersects(cyan.Cyan_bounds))
-            {
-                
-                Globals.flaga_STOP = true;
-            }
-            else if(pacman.Pacman_bounds.Intersects(orange.Orange_bounds))
-            {
-                Globals.flaga_STOP = true;
+            if (pacman.Pacman_bounds.Intersects(cyan.Cyan_bounds)||
+                pacman.Pacman_bounds.Intersects(orange.Orange_bounds)|| 
+                pacman.Pacman_bounds.Intersects(red.Red_bounds)|| 
+                pacman.Pacman_bounds.Intersects(pink.Pink_bounds)){    
 
+               Globals.flaga_STOP = true;
             }
-            else if (pacman.Pacman_bounds.Intersects(red.Red_bounds))
-            {
-                Globals.flaga_STOP = true;
-
-            }
-            else if (pacman.Pacman_bounds.Intersects(pink.Pink_bounds))
-            {
-                Globals.flaga_STOP = true;
-
-            }
+           
         }
 
 

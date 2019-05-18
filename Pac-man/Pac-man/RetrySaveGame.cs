@@ -77,12 +77,15 @@ namespace Pac_man
                 {
                     case Globals.Retry_State.RETRY:
                         Globals.currentState = Globals.EnStates.START;
+                        Globals.flaga_STOP = false;
                         break;
                     case Globals.Retry_State.SAVE:
                         save_score();
                         break;
                     case Globals.Retry_State.QUIT:
                         Globals.currentState = Globals.EnStates.MENU;
+                        Globals.flaga_STOP = false;
+
                         break;
                 }
             }

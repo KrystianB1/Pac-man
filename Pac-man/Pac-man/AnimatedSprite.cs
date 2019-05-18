@@ -13,6 +13,8 @@ namespace Pac_man
         public Texture2D Texture { get; set; }
         public int Rows { get; set; }
         public int Columns { get; set; }
+
+    
         private int currentFrame;
         private int totalFrames;
         private int frameSwitcher;
@@ -40,6 +42,19 @@ namespace Pac_man
                 currentFrame = 0;
             }
         }
+        public int CurrentFrame
+        {
+            get
+            {
+                return currentFrame;
+            }
+
+            set
+            {
+                currentFrame = value;
+            }
+        }
+
 
         public void Draw(Vector2 location)
         {
