@@ -49,6 +49,12 @@
 /processorParam:TextureFormat=Color
 /build:Bonus/Strawberry.png
 
+#begin dead.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:dead.mp3
+
 #begin font.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -79,6 +85,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:in_gate.png
+
+#begin kolizja.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:kolizja.mp3
 
 #begin Levels/lvl1.txt
 /copy:Levels/lvl1.txt
@@ -460,4 +472,10 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:wall.png
+
+#begin wstep.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:wstep.mp3
 

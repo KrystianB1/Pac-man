@@ -7,6 +7,8 @@ using Microsoft.Xna.Framework;
 using System.IO;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 namespace Pac_man
 {
@@ -32,13 +34,15 @@ namespace Pac_man
         Monster_orange orange;
         Monster_red red;
         Monster_pink pink;
+        Song start,stop;
+        
 
         //POSITION
         int position_X_pac = 480;
         int position_Y_pac = 480;
         const int velocity_X_pac = 3;
         const int velocity_Y_pac = 3;
-
+      
 
 
         //LEVELS
@@ -55,12 +59,13 @@ namespace Pac_man
             texture_gate = Globals.contentManager.Load<Texture2D>("gate");
             texture_in_gate = Globals.contentManager.Load<Texture2D>("in_gate");
             texture_portal = Globals.contentManager.Load<Texture2D>("portal");
+            start = Globals.contentManager.Load<Song>("wstep"); // załadowane tylko dodac na początku gry, dopisz ifa ze zliczy czas dzwięku i ustawić flage na false zeby gra się rozpoczeła
+            stop = Globals.contentManager.Load<Song>("dead");
             pacman = new Pacman_main();
             cyan = new Monster_cyan();
             orange = new Monster_orange();
             red = new Monster_red();
             pink = new Monster_pink();
-
             line = new string[20];
             loadlevels(levels_two);
         }
@@ -104,7 +109,7 @@ namespace Pac_man
 
         public override void Update(GameTime gameTime)
         {
-
+            
             Draw();
             pacman.Update();
             cyan.Update();
@@ -112,14 +117,20 @@ namespace Pac_man
             red.Update();
             pink.Update();
             check_colision();
+           
+            
         }
         public void check_colision()
         {
             if (pacman.Pacman_bounds.Intersects(cyan.Cyan_bounds)||
                 pacman.Pacman_bounds.Intersects(orange.Orange_bounds)|| 
-                pacman.Pacman_bounds.Intersects(red.Red_bounds)|| 
-                pacman.Pacman_bounds.Intersects(pink.Pink_bounds))    
+                pacman.Pacman_bounds.Intersects(red.Red_bounds)||
+                pacman.Pacman_bounds.Intersects(pink.Pink_bounds))
+            {
                 Globals.flaga_STOP = true;
+                MediaPlayer.Play(stop);
+            }    
+                
             
            
         }
@@ -173,9 +184,7 @@ namespace Pac_man
                                 foreach (Rectangle rect in Globals.pointsList)
                                 {
                                     if (rect.Contains(location))
-                                    {
-
-
+                                    {                                     
                                         Globals.spriteBatch.Draw(texture_point, location, Color.White);
 
                                         break;

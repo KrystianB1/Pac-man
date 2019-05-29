@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +24,7 @@ namespace Pac_man
         Rectangle location;
         Vector2 pac_man_bounds;
         Rectangle pacman_bounds;
-
+        Song collision;
 
         int position_X_pac = 50;
         int position_Y_pac = 480;
@@ -43,7 +45,7 @@ namespace Pac_man
             texture_pac_up = Globals.contentManager.Load<Texture2D>("monster/pac_up");
             texture_pac_down = Globals.contentManager.Load<Texture2D>("monster/pac_down");
             texture_pac_dead = Globals.contentManager.Load<Texture2D>("monster/pac_dead");
-
+            collision = Globals.contentManager.Load<Song>("kolizja");
 
             animated_packman = new AnimatedSprite(texture_pac_right, 1, 3);
             pacman_bounds = new Rectangle();
@@ -115,6 +117,7 @@ namespace Pac_man
                         {
                             Globals.index_for_score += 10;
                             Globals.pointsList.Remove(r);
+                            MediaPlayer.Play(collision);
 
                             break;
                         }
@@ -155,6 +158,7 @@ namespace Pac_man
                         {
                             Globals.index_for_score += 10;
                             Globals.pointsList.Remove(r);
+                            MediaPlayer.Play(collision);
 
                             break;
                         }
@@ -194,6 +198,7 @@ namespace Pac_man
                         {
                             Globals.index_for_score += 10;
                             Globals.pointsList.Remove(r);
+                            MediaPlayer.Play(collision);
 
                             break;
                         }
@@ -242,6 +247,7 @@ namespace Pac_man
                         {
                             Globals.index_for_score += 10;
                             Globals.pointsList.Remove(r);
+                            MediaPlayer.Play(collision);
                             break;
                         }
                     }
