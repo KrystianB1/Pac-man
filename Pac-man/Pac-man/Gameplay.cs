@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
+using System.Diagnostics;
 
 namespace Pac_man
 {
@@ -35,7 +36,7 @@ namespace Pac_man
         Monster_red red;
         Monster_pink pink;
         Song start,stop;
-        
+        bool gamestart = true;
 
         //POSITION
         int position_X_pac = 480;
@@ -59,8 +60,7 @@ namespace Pac_man
             texture_gate = Globals.contentManager.Load<Texture2D>("gate");
             texture_in_gate = Globals.contentManager.Load<Texture2D>("in_gate");
             texture_portal = Globals.contentManager.Load<Texture2D>("portal");
-            start = Globals.contentManager.Load<Song>("wstep"); // załadowane tylko dodac na początku gry, dopisz ifa ze zliczy czas dzwięku i ustawić flage na false zeby gra się rozpoczeła
-            stop = Globals.contentManager.Load<Song>("dead");
+            start = Globals.contentManager.Load<Song>("wstep"); 
             pacman = new Pacman_main();
             cyan = new Monster_cyan();
             orange = new Monster_orange();
@@ -117,8 +117,20 @@ namespace Pac_man
             red.Update();
             pink.Update();
             check_colision();
-           
-            
+            if (gamestart == true)
+            {
+                MediaPlayer.Play(start);
+                Stopwatch s = new Stopwatch();
+                s.Start();
+                while (s.Elapsed < TimeSpan.FromSeconds(4))
+                {
+
+                }
+
+                s.Stop();
+                gamestart = false;
+            }
+
         }
         public void check_colision()
         {
