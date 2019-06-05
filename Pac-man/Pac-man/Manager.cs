@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Pac_man
 {
-    class Manager : Game1
+    class Manager
     {
         private GameTime gameTime;
         Menu menu = new Menu();
         Splash splash = new Splash();
         Gameplay game = new Gameplay();
-        Score score;
+        Score score = new Score();
         RetrySaveGame retry =new RetrySaveGame();
 
 
@@ -33,10 +33,10 @@ namespace Pac_man
                     menu.Update(gameTime);
                     break;
                 case Globals.EnStates.START:
+                    check_colision_for_new_game();
                     game.Update(gameTime);
                     break;
                 case Globals.EnStates.SCORE:
-                    score = new Score();
                     score.Update(gameTime);
                     break;
                 case Globals.EnStates.EXIT:
@@ -47,6 +47,24 @@ namespace Pac_man
                     break;
 
             }
+
+
+
+        }
+
+        private void check_colision_for_new_game()
+        {
+            if (Globals.flaga_DEAD == true)
+            {
+                Globals.pointsList.Clear();
+                Globals.mapdraw = false;
+                Globals.index_for_score = 0;
+                game = new Gameplay();
+                Globals.flaga_DEAD = false;
+                Globals.flaga_STOP = false;
+
+            }
+
         }
     }
 }

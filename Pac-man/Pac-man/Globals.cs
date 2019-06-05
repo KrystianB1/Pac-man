@@ -35,6 +35,7 @@ namespace Pac_man
         public static Animated_State Animated_sprite_pink;
         public static Retry_State retry_state;
         public static menu_state selectedItem;
+        public static bool flaga_DEAD = false;
         public static int test_left = 0;
         public static int test_right = 0;
         public static int test_up = 0;

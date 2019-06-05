@@ -284,8 +284,12 @@ namespace Pac_man
 
                 }
                 if (animated_packman.CurrentFrame == 9)
+                {
+
+
                     Globals.currentState = Globals.EnStates.RETRY;
-                
+                    Globals.flaga_DEAD = true;
+                }
 
             }
             Globals.spriteBatch.Begin();

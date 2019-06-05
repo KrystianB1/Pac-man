@@ -118,7 +118,7 @@ namespace Pac_man
             red.Update();
             pink.Update();
             check_colision();
-            if (gamestart == true)
+            /*if (gamestart == true)
             {
                 MediaPlayer.Play(start);
                 Stopwatch s = new Stopwatch();
@@ -130,7 +130,7 @@ namespace Pac_man
                 MediaPlayer.Stop();
                 s.Stop();
                 gamestart = false;
-            }
+            }*/
 
         }
         public void check_colision()
