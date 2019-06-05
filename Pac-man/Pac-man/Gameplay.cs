@@ -60,7 +60,8 @@ namespace Pac_man
             texture_gate = Globals.contentManager.Load<Texture2D>("gate");
             texture_in_gate = Globals.contentManager.Load<Texture2D>("in_gate");
             texture_portal = Globals.contentManager.Load<Texture2D>("portal");
-            start = Globals.contentManager.Load<Song>("wstep"); 
+            start = Globals.contentManager.Load<Song>("wstep");
+            stop = Globals.contentManager.Load<Song>("dead");
             pacman = new Pacman_main();
             cyan = new Monster_cyan();
             orange = new Monster_orange();
@@ -126,7 +127,7 @@ namespace Pac_man
                 {
 
                 }
-
+                MediaPlayer.Stop();
                 s.Stop();
                 gamestart = false;
             }
