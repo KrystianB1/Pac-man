@@ -111,17 +111,26 @@ namespace Pac_man
                             break;
                         }
                     }
-                    foreach (Rectangle r in Globals.pointsList)
+                    foreach (Rectangle r in Globals.pointList_collision)
                     {
+                        
                         if (pacman_bounds.Intersects(r))
                         {
-                            Globals.index_for_score += 10;
                             Globals.pointsList.Remove(r);
-                            MediaPlayer.Play(collision);
+                            foreach (Rectangle q in Globals.pointsList)
+                            {
+                                if (pacman_bounds.Intersects(q))
+                                {
+                                    Globals.index_for_score += 10;
+                                    Globals.pointsList.Remove(q);
+                                    MediaPlayer.Play(collision);
 
-                            break;
+                                    break;
+                                }
+                            }
                         }
                     }
+
                     if (Globals.test_up < 29)
                     {
                         Globals.test_up++;
@@ -152,15 +161,23 @@ namespace Pac_man
                             break;
                         }
                     }
-                    foreach (Rectangle r in Globals.pointsList)
+                    foreach (Rectangle r in Globals.pointList_collision)
                     {
+
                         if (pacman_bounds.Intersects(r))
                         {
-                            Globals.index_for_score += 10;
                             Globals.pointsList.Remove(r);
-                            MediaPlayer.Play(collision);
+                            foreach (Rectangle q in Globals.pointsList)
+                            {
+                                if (pacman_bounds.Intersects(q))
+                                {
+                                    Globals.index_for_score += 10;
+                                    Globals.pointsList.Remove(q);
+                                    MediaPlayer.Play(collision);
 
-                            break;
+                                    break;
+                                }
+                            }
                         }
                     }
                     if (Globals.test_down < 29)
@@ -192,18 +209,25 @@ namespace Pac_man
                             break;
                         }
                     }
-                    foreach (Rectangle r in Globals.pointsList)
+                    foreach (Rectangle r in Globals.pointList_collision)
                     {
+
                         if (pacman_bounds.Intersects(r))
                         {
-                            Globals.index_for_score += 10;
                             Globals.pointsList.Remove(r);
-                            MediaPlayer.Play(collision);
+                            foreach (Rectangle q in Globals.pointsList)
+                            {
+                                if (pacman_bounds.Intersects(q))
+                                {
+                                    Globals.index_for_score += 10;
+                                    Globals.pointsList.Remove(q);
+                                    MediaPlayer.Play(collision);
 
-                            break;
+                                    break;
+                                }
+                            }
                         }
                     }
-
                     foreach (Rectangle r in Globals.portalsList)
                     {
                         if (pacman_bounds.Intersects(r))
@@ -241,14 +265,22 @@ namespace Pac_man
                             break;
                         }
                     }
-                    foreach (Rectangle r in Globals.pointsList)
+                    foreach (Rectangle r in Globals.pointList_collision)
                     {
+
                         if (pacman_bounds.Intersects(r))
                         {
-                            Globals.index_for_score += 10;
                             Globals.pointsList.Remove(r);
-                            MediaPlayer.Play(collision);
-                            break;
+                            foreach (Rectangle q in Globals.pointsList)
+                            {
+                                if (pacman_bounds.Intersects(q))
+                                {
+                                    Globals.index_for_score += 10;
+                                    Globals.pointsList.Remove(q);
+                                    MediaPlayer.Play(collision);
+                                    break;
+                                }
+                            }
                         }
                     }
                     foreach (Rectangle r in Globals.portalsList)

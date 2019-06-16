@@ -57,6 +57,7 @@ namespace Pac_man
             if (Globals.flaga_DEAD == true)
             {
                 Globals.pointsList.Clear();
+                Globals.pointList_collision.Clear();
                 Globals.mapdraw = false;
                 Globals.index_for_score = 0;
                 game = new Gameplay();

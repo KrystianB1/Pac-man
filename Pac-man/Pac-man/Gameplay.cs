@@ -28,6 +28,7 @@ namespace Pac_man
 
         //LOCATION
         Rectangle location;
+        Rectangle location_bounds;
         Vector2 pac_man_bounds;
         Rectangle pacman_bounds;
         Pacman_main pacman;
@@ -184,12 +185,17 @@ namespace Pac_man
                             location.Height = 15;
                             location.X = location.X + 7;
                             location.Y = location.Y + 7;
+                            location_bounds.Width = 1;
+                            location_bounds.Height = 1;
+                            location_bounds.X = location.X + 15;
+                            location_bounds.Y = location.Y + 15;
                             if (Globals.mapdraw == false)
                             {
 
 
                                 Globals.spriteBatch.Draw(texture_point, location, Color.White);
                                 Globals.pointsList.Add(location);
+                                Globals.pointList_collision.Add(location_bounds);
 
                             }
                             else
@@ -204,11 +210,16 @@ namespace Pac_man
                                     }
                                 }
 
+
                             }
                             location.Width = 30;
                             location.Height = 30;
                             location.X = location.X - 7;
                             location.Y = location.Y - 7;
+                            location_bounds.Width = 30;
+                            location_bounds.Height = 30;
+                            location_bounds.X = location_bounds.X - 15;
+                            location_bounds.Y = location_bounds.Y - 15;
                             break;
                         case 2:
                             Globals.spriteBatch.Draw(texture_gate, location, Color.White);

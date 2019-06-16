@@ -24,6 +24,7 @@ namespace Pac_man
         public static Color normal = Color.Red;
         public static List<Rectangle> collisionList = new List<Rectangle>();
         public static List<Rectangle> pointsList = new List<Rectangle>();
+        public static List<Rectangle> pointList_collision = new List<Rectangle>();
         public static List<Rectangle> portalsList = new List<Rectangle>();
         public static int index_for_score = 0;
         public static bool mapdraw = false;
