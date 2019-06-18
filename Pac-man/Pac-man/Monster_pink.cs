@@ -17,6 +17,11 @@ namespace Pac_man
         Texture2D texture_pink_right;
         Texture2D texture_pink_down;
 
+        Texture2D texture_blue_up;
+        Texture2D texture_blue_left;
+        Texture2D texture_blue_right;
+        Texture2D texture_blue_down;
+
         Rectangle location;
         Vector2 pink_vector_bounds;
         Rectangle pink_bounds;
@@ -33,6 +38,11 @@ namespace Pac_man
             texture_pink_left = Globals.contentManager.Load<Texture2D>("monster/monster_pink_left");
             texture_pink_up = Globals.contentManager.Load<Texture2D>("monster/monster_pink_up");
             texture_pink_down = Globals.contentManager.Load<Texture2D>("monster/monster_pink_down");
+
+            texture_blue_right = Globals.contentManager.Load<Texture2D>("monster/monster_blue_right");
+            texture_blue_left = Globals.contentManager.Load<Texture2D>("monster/monster_blue_left");
+            texture_blue_up = Globals.contentManager.Load<Texture2D>("monster/monster_blue_up");
+            texture_blue_down = Globals.contentManager.Load<Texture2D>("monster/monster_blue_down");
 
             animated_pink = new AnimatedSprite(texture_pink_up, 1, 2);
             pink_bounds = new Rectangle();
@@ -67,6 +77,7 @@ namespace Pac_man
             animated_pink.Update();
             pink_vector_bounds = new Vector2(position_X_pac, position_Y_pac);
             pink_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
+            check_animated();
             if (Globals.flaga_STOP == false)
             {
 
@@ -175,17 +186,45 @@ namespace Pac_man
             switch (Globals.Animated_sprite_pink)
             {
                 case Globals.Animated_State.UP:
-                    animated_pink = new AnimatedSprite(texture_pink_up, 1, 2);
+                    if (Globals.powered_up_check == false)
+                    {
+                        animated_pink = new AnimatedSprite(texture_pink_up, 1, 2);
+                    }
+                    else
+                    {
+                        animated_pink = new AnimatedSprite(texture_blue_up, 1, 2);
+                    }
 
                     break;
                 case Globals.Animated_State.DOWN:
-                    animated_pink = new AnimatedSprite(texture_pink_down, 1, 2);
+                    if (Globals.powered_up_check == false)
+                    {
+                        animated_pink = new AnimatedSprite(texture_pink_down, 1, 2);
+                    }
+                    else
+                    {
+                        animated_pink = new AnimatedSprite(texture_blue_down, 1, 2);
+                    }
                     break;
                 case Globals.Animated_State.RIGHT:
-                    animated_pink = new AnimatedSprite(texture_pink_right, 1, 2);
+                    if (Globals.powered_up_check == false)
+                    {
+                        animated_pink = new AnimatedSprite(texture_pink_right, 1, 2);
+                    }
+                    else
+                    {
+                        animated_pink = new AnimatedSprite(texture_blue_right, 1, 2);
+                    }
                     break;
                 case Globals.Animated_State.LEFT:
-                    animated_pink = new AnimatedSprite(texture_pink_left, 1, 2);
+                    if (Globals.powered_up_check == false)
+                    {
+                        animated_pink = new AnimatedSprite(texture_pink_left, 1, 2);
+                    }
+                    else
+                    {
+                        animated_pink = new AnimatedSprite(texture_blue_left, 1, 2);
+                    }
                     break;
 
             }

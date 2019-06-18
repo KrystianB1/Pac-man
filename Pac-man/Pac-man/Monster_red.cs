@@ -17,6 +17,11 @@ namespace Pac_man
         Texture2D texture_red_right;
         Texture2D texture_red_down;
 
+        Texture2D texture_blue_up;
+        Texture2D texture_blue_left;
+        Texture2D texture_blue_right;
+        Texture2D texture_blue_down;
+
         Rectangle location;
         Vector2 red_vector_bounds;
         Rectangle red_bounds;
@@ -34,6 +39,12 @@ namespace Pac_man
             texture_red_left = Globals.contentManager.Load<Texture2D>("monster/monster_red_left");
             texture_red_up = Globals.contentManager.Load<Texture2D>("monster/monster_red_up");
             texture_red_down = Globals.contentManager.Load<Texture2D>("monster/monster_red_down");
+
+
+            texture_blue_right = Globals.contentManager.Load<Texture2D>("monster/monster_blue_right");
+            texture_blue_left = Globals.contentManager.Load<Texture2D>("monster/monster_blue_left");
+            texture_blue_up = Globals.contentManager.Load<Texture2D>("monster/monster_blue_up");
+            texture_blue_down = Globals.contentManager.Load<Texture2D>("monster/monster_blue_down");
 
             animated_red = new AnimatedSprite(texture_red_up, 1, 2);
             red_bounds = new Rectangle();
@@ -69,6 +80,7 @@ namespace Pac_man
             animated_red.Update();
             red_vector_bounds = new Vector2(position_X_pac, position_Y_pac);
             red_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
+            check_animated();
             if (Globals.flaga_STOP == false)
             {
 
@@ -178,17 +190,45 @@ namespace Pac_man
             switch (Globals.Animated_sprite_red)
             {
                 case Globals.Animated_State.UP:
-                    animated_red = new AnimatedSprite(texture_red_up, 1, 2);
+                    if (Globals.powered_up_check == false)
+                    {
+                        animated_red = new AnimatedSprite(texture_red_up, 1, 2);
+                    }
+                    else
+                    {
+                        animated_red = new AnimatedSprite(texture_blue_up, 1, 2);
+                    }
 
                     break;
                 case Globals.Animated_State.DOWN:
-                    animated_red = new AnimatedSprite(texture_red_down, 1, 2);
+                    if (Globals.powered_up_check == false)
+                    {
+                        animated_red = new AnimatedSprite(texture_red_down, 1, 2);
+                    }
+                    else
+                    {
+                        animated_red = new AnimatedSprite(texture_blue_down, 1, 2);
+                    }
                     break;
                 case Globals.Animated_State.RIGHT:
-                    animated_red = new AnimatedSprite(texture_red_right, 1, 2);
+                    if (Globals.powered_up_check == false)
+                    {
+                        animated_red = new AnimatedSprite(texture_red_right, 1, 2);
+                    }
+                    else
+                    {
+                        animated_red = new AnimatedSprite(texture_blue_right, 1, 2);
+                    }
                     break;
                 case Globals.Animated_State.LEFT:
-                    animated_red = new AnimatedSprite(texture_red_left, 1, 2);
+                    if (Globals.powered_up_check == false)
+                    {
+                        animated_red = new AnimatedSprite(texture_red_left, 1, 2);
+                    }
+                    else
+                    {
+                        animated_red = new AnimatedSprite(texture_blue_left, 1, 2);
+                    }
                     break;
 
             }

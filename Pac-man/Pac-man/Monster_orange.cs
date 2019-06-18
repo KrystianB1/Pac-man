@@ -17,6 +17,11 @@ namespace Pac_man
         Texture2D texture_orange_right;
         Texture2D texture_orange_down;
 
+        Texture2D texture_blue_up;
+        Texture2D texture_blue_left;
+        Texture2D texture_blue_right;
+        Texture2D texture_blue_down;
+
         Rectangle location;
         Vector2 orange_vector_bounds;
         Rectangle orange_bounds;
@@ -34,6 +39,11 @@ namespace Pac_man
             texture_orange_left = Globals.contentManager.Load<Texture2D>("monster/monster_orange_left");
             texture_orange_up = Globals.contentManager.Load<Texture2D>("monster/monster_orange_up");
             texture_orange_down = Globals.contentManager.Load<Texture2D>("monster/monster_orange_down");
+
+            texture_blue_right = Globals.contentManager.Load<Texture2D>("monster/monster_blue_right");
+            texture_blue_left = Globals.contentManager.Load<Texture2D>("monster/monster_blue_left");
+            texture_blue_up = Globals.contentManager.Load<Texture2D>("monster/monster_blue_up");
+            texture_blue_down = Globals.contentManager.Load<Texture2D>("monster/monster_blue_down");
 
             animated_orange = new AnimatedSprite(texture_orange_up, 1, 2);
             orange_bounds = new Rectangle();
@@ -66,6 +76,7 @@ namespace Pac_man
             animated_orange.Update();
             orange_vector_bounds = new Vector2(position_X_pac, position_Y_pac);
             orange_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
+            check_animated();
             if (Globals.flaga_STOP == false)
             {
 
@@ -174,17 +185,45 @@ namespace Pac_man
             switch (Globals.Animated_sprite_orange)
             {
                 case Globals.Animated_State.UP:
-                    animated_orange = new AnimatedSprite(texture_orange_up, 1, 2);
+                    if (Globals.powered_up_check == false)
+                    {
+                        animated_orange = new AnimatedSprite(texture_orange_up, 1, 2);
+                    }
+                    else
+                    {
+                        animated_orange = new AnimatedSprite(texture_blue_up, 1, 2);
+                    }
 
                     break;
                 case Globals.Animated_State.DOWN:
-                    animated_orange = new AnimatedSprite(texture_orange_down, 1, 2);
+                    if (Globals.powered_up_check == false)
+                    {
+                        animated_orange = new AnimatedSprite(texture_orange_down, 1, 2);
+                    }
+                    else
+                    {
+                        animated_orange = new AnimatedSprite(texture_blue_down, 1, 2);
+                    }
                     break;
                 case Globals.Animated_State.RIGHT:
-                    animated_orange = new AnimatedSprite(texture_orange_right, 1, 2);
+                    if (Globals.powered_up_check == false)
+                    {
+                        animated_orange = new AnimatedSprite(texture_orange_right, 1, 2);
+                    }
+                    else
+                    {
+                        animated_orange = new AnimatedSprite(texture_blue_right, 1, 2);
+                    }
                     break;
                 case Globals.Animated_State.LEFT:
-                    animated_orange = new AnimatedSprite(texture_orange_left, 1, 2);
+                    if (Globals.powered_up_check == false)
+                    {
+                        animated_orange = new AnimatedSprite(texture_orange_left, 1, 2);
+                    }
+                    else
+                    {
+                        animated_orange = new AnimatedSprite(texture_blue_left, 1, 2);
+                    }
                     break;
 
             }
