@@ -42,6 +42,7 @@ namespace Pac_man
         public static Retry_State retry_state;
         public static menu_state selectedItem;
         public static bool flaga_DEAD = false;
+        public static bool flaga_change_color = true;
         public static int test_left = 0;
         public static int test_right = 0;
         public static int test_up = 0;

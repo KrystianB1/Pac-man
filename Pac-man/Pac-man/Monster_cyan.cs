@@ -31,7 +31,7 @@ namespace Pac_man
         int position_Y_pac = 480;
         const int velocity_X_pac = 1;
         const int velocity_Y_pac = 1;
-
+        
         
         public Monster_cyan()
         {
@@ -47,6 +47,8 @@ namespace Pac_man
             animated_cyan = new AnimatedSprite(texture_cyan_up, 1, 2);
             cyan_bounds = new Rectangle();
             location = new Rectangle();
+            Globals.flaga_change_color = true;
+            
         }
 
         public void Update()
@@ -77,7 +79,7 @@ namespace Pac_man
             animated_cyan.Update();
             cyan_vector_bounds = new Vector2(position_X_pac, position_Y_pac);
             cyan_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
-            check_animated();
+            LoadCheckAnimated();
             if (Globals.flaga_STOP == false)
             {
 
@@ -181,6 +183,20 @@ namespace Pac_man
             Globals.spriteBatch.End();
         }
 
+        public void LoadCheckAnimated()
+        {
+            if (Globals.powered_up_check == true) {
+                if (Globals.flaga_change_color == true)
+                {
+                    check_animated();
+                    Globals.flaga_change_color = false;
+                }
+                
+            }
+        }
+
+       
+
         public void check_animated()
         {
             switch (Globals.Animated_sprite_cyan)
@@ -190,7 +206,7 @@ namespace Pac_man
                     {
                         animated_cyan = new AnimatedSprite(texture_cyan_up, 1, 2);
                     }
-                    else
+                    else 
                     {
                         animated_cyan = new AnimatedSprite(texture_blue_up, 1, 2);
                     }

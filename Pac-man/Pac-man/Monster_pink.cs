@@ -77,7 +77,8 @@ namespace Pac_man
             animated_pink.Update();
             pink_vector_bounds = new Vector2(position_X_pac, position_Y_pac);
             pink_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
-            check_animated();
+            LoadCheckAnimated();
+
             if (Globals.flaga_STOP == false)
             {
 
@@ -180,6 +181,19 @@ namespace Pac_man
             animated_pink.Draw_for_pacman(pink_vector_bounds);
             Globals.spriteBatch.End();
         }
+        public void LoadCheckAnimated()
+        {
+            if (Globals.powered_up_check == true)
+            {
+                if (Globals.flaga_change_color == true)
+                {
+                    check_animated();
+                    Globals.flaga_change_color = false;
+                }
+
+            }
+        }
+
 
         public void check_animated()
         {
