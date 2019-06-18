@@ -30,7 +30,7 @@ namespace Pac_man
         int position_Y_pac = 480;
         const int velocity_X_pac = 1;
         const int velocity_Y_pac = 1;
-
+        int dir = 0;
 
         KeyboardState keyboardState;
         
@@ -46,19 +46,16 @@ namespace Pac_man
             texture_pac_down = Globals.contentManager.Load<Texture2D>("monster/pac_down");
             texture_pac_dead = Globals.contentManager.Load<Texture2D>("monster/pac_dead");
             collision = Globals.contentManager.Load<Song>("kolizja");
-
             animated_packman = new AnimatedSprite(texture_pac_right, 1, 3);
             pacman_bounds = new Rectangle();
             location = new Rectangle();
         }
-
         public Rectangle Pacman_bounds
         {
             get
             {
                 return pacman_bounds;
             }
-
             set
             {
                 pacman_bounds = value;
@@ -76,259 +73,250 @@ namespace Pac_man
 
         public void controll()
         {
-           
-            block_key = true;
-            animated_packman.Update();
-            pac_man_bounds = new Vector2(position_X_pac, position_Y_pac);
-            pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
-            if (Globals.flaga_STOP == false)
-            { 
 
-                if (Globals.test_up == 0 && Globals.test_down == 0 && Globals.test_left == 0 && Globals.test_right == 0)
-                {
-                    keyboardState = Keyboard.GetState();
-                }
+                block_key = true;
+                animated_packman.Update();
+                pac_man_bounds = new Vector2(position_X_pac, position_Y_pac);
+                pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
+                if (Globals.flaga_STOP == false)
+                { 
 
-                if ((Keyboard.GetState().IsKeyDown(Keys.Up) && block_key == true) || Globals.test_up > 0)
-                {
-                    block_key = false;
-
-                    if (Globals.Animated_sprite != Globals.Animated_State.UP)
+                    if (Globals.test_up == 0 && Globals.test_down == 0 && Globals.test_left == 0 && Globals.test_right == 0)
                     {
-                        Globals.Animated_sprite = Globals.Animated_State.UP;
-                        check_animated();
+                        keyboardState = Keyboard.GetState();
                     }
-
-                    position_Y_pac -= velocity_Y_pac;
-                    pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
-                    foreach (Rectangle r in Globals.collisionList)
+                if ((Keyboard.GetState().IsKeyDown(Keys.Up) && block_key == true))
+                {
+                    dir = 0;
+                }
+                else
+                {
+                    if ((Keyboard.GetState().IsKeyDown(Keys.Down) && block_key == true))
                     {
-                        if (r.Intersects(pacman_bounds))
+                        dir = 1;
+                    }
+                    else
+                    {
+                        if ((Keyboard.GetState().IsKeyDown(Keys.Right) && block_key == true))
                         {
-                            pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
-                            position_Y_pac += velocity_Y_pac;
-
-                            break;
+                            dir = 2;
+                        }
+                        else
+                        {
+                            if ((Keyboard.GetState().IsKeyDown(Keys.Left) && block_key == true))
+                            {
+                                dir = 3;
+                            }
                         }
                     }
-                    foreach (Rectangle r in Globals.pointList_collision)
+                }
+                    if ((dir==0 || Globals.test_up > 0))
                     {
+                        block_key = false;
+
+                        if (Globals.Animated_sprite != Globals.Animated_State.UP)
+                        {
+                            Globals.Animated_sprite = Globals.Animated_State.UP;
+                            check_animated();
+                        }
                         
-                        if (pacman_bounds.Intersects(r))
+                        position_Y_pac -= velocity_Y_pac;
+                        pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
+                        foreach (Rectangle r in Globals.collisionList)
                         {
-                            Globals.pointsList.Remove(r);
-                            foreach (Rectangle q in Globals.pointsList)
+                            if (r.Intersects(pacman_bounds))
                             {
-                                if (pacman_bounds.Intersects(q))
-                                {
-                                    Globals.index_for_score += 10;
-                                    Globals.pointsList.Remove(q);
-                                    MediaPlayer.Play(collision);
+                                pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
+                                position_Y_pac += velocity_Y_pac;
 
-                                    break;
-                                }
+                                break;
                             }
                         }
+                        foreach (Rectangle r in Globals.pointsList)
+                        {
+                            if (pacman_bounds.Intersects(r))
+                            {
+                                Globals.index_for_score += 10;
+                                Globals.pointsList.Remove(r);
+                                MediaPlayer.Play(collision);
+
+                                break;
+                            }
+                        }
+                        if (Globals.test_up < 29)
+                        {
+                            Globals.test_up++;
+                        }
+                        else
+                        {
+                            Globals.test_up = 0;
+                        }
+                    }
+                if ((dir==1 && block_key == true) || Globals.test_down > 0)
+                {
+                        block_key = false;
+                        if (Globals.Animated_sprite != Globals.Animated_State.DOWN)
+                        {
+                            Globals.Animated_sprite = Globals.Animated_State.DOWN;
+                            check_animated();
+                        }
+
+                        position_Y_pac += velocity_Y_pac;
+                        pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
+
+                        foreach (Rectangle r in Globals.collisionList)
+                        {
+                            if (r.Intersects(pacman_bounds))
+                            {
+                                position_Y_pac -= velocity_Y_pac;
+                                pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
+                                break;
+                            }
+                        }
+                        foreach (Rectangle r in Globals.pointsList)
+                        {
+                            if (pacman_bounds.Intersects(r))
+                            {
+                                Globals.index_for_score += 10;
+                                Globals.pointsList.Remove(r);
+                                MediaPlayer.Play(collision);
+
+                                break;
+                            }
+                        }
+                        if (Globals.test_down < 29)
+                        {
+                            Globals.test_down++;
+                        }
+                        else
+                        {
+                            Globals.test_down = 0;
+                        }
+                    }
+                if (dir==2  || Globals.test_right > 0)
+                {
+                        block_key = false;
+                        if (Globals.Animated_sprite != Globals.Animated_State.RIGHT)
+                        {
+                            Globals.Animated_sprite = Globals.Animated_State.RIGHT;
+                            check_animated();
+                        }
+
+                        position_X_pac += velocity_X_pac;
+                        pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
+                        foreach (Rectangle r in Globals.collisionList)
+                        {
+                            if (r.Intersects(pacman_bounds))
+                            {
+                                position_X_pac -= velocity_X_pac;
+                                pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
+                                break;
+                            }
+                        }
+                        foreach (Rectangle r in Globals.pointsList)
+                        {
+                            if (pacman_bounds.Intersects(r))
+                            {
+                                Globals.index_for_score += 10;
+                                Globals.pointsList.Remove(r);
+                                MediaPlayer.Play(collision);
+
+                                break;
+                            }
+                        }
+
+                        foreach (Rectangle r in Globals.portalsList)
+                        {
+                            if (pacman_bounds.Intersects(r))
+                            {
+                                position_X_pac = 30;
+                                break;
+                            }
+                        }
+                        if (Globals.test_right < 29)
+                        {
+                            Globals.test_right++;
+                        }
+                        else
+                        {
+                            Globals.test_right = 0;
+                        }
+                    }
+                  if (dir==3 || Globals.test_left > 0)
+                {
+                        block_key = false;
+                        if (Globals.Animated_sprite != Globals.Animated_State.LEFT)
+                        {
+                            Globals.Animated_sprite = Globals.Animated_State.LEFT;
+                            check_animated();
+                        }
+
+                        position_X_pac -= velocity_X_pac;
+                        pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
+                        foreach (Rectangle r in Globals.collisionList)
+                        {
+                            if (r.Intersects(pacman_bounds))
+                            {
+                                position_X_pac += velocity_X_pac;
+                                pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
+                                break;
+                            }
+                        }
+                        foreach (Rectangle r in Globals.pointsList)
+                        {
+                            if (pacman_bounds.Intersects(r))
+                            {
+                                Globals.index_for_score += 10;
+                                Globals.pointsList.Remove(r);
+                                MediaPlayer.Play(collision);
+                                break;
+                            }
+                        }
+                        foreach (Rectangle r in Globals.portalsList)
+                        {
+                            if (pacman_bounds.Intersects(r))
+                            {
+                                position_X_pac = 540;
+                                break;
+                            }
+                        }
+                        if (Globals.test_left < 29)
+                        {
+                            Globals.test_left++;
+                        }
+                        else
+                        {
+                            Globals.test_left = 0;
+                        }
+                    }
+                    if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+                    {
+                        Globals.currentState = Globals.EnStates.RETRY;
+
                     }
 
-                    if (Globals.test_up < 29)
-                    {
-                        Globals.test_up++;
-                    }
-                    else
-                    {
-                        Globals.test_up = 0;
-                    }
                 }
-                if ((Keyboard.GetState().IsKeyDown(Keys.Down) && block_key == true) || Globals.test_down > 0)
+                else
                 {
-                    block_key = false;
-                    if (Globals.Animated_sprite != Globals.Animated_State.DOWN)
+                    if (Globals.Animated_sprite != Globals.Animated_State.DEAD)
                     {
-                        Globals.Animated_sprite = Globals.Animated_State.DOWN;
+                        Globals.Animated_sprite = Globals.Animated_State.DEAD;
                         check_animated();
-                    }
 
-                    position_Y_pac += velocity_Y_pac;
-                    pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
-
-                    foreach (Rectangle r in Globals.collisionList)
-                    {
-                        if (r.Intersects(pacman_bounds))
-                        {
-                            position_Y_pac -= velocity_Y_pac;
-                            pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
-                            break;
-                        }
                     }
-                    foreach (Rectangle r in Globals.pointList_collision)
+                    if (animated_packman.CurrentFrame == 9)
                     {
 
-                        if (pacman_bounds.Intersects(r))
-                        {
-                            Globals.pointsList.Remove(r);
-                            foreach (Rectangle q in Globals.pointsList)
-                            {
-                                if (pacman_bounds.Intersects(q))
-                                {
-                                    Globals.index_for_score += 10;
-                                    Globals.pointsList.Remove(q);
-                                    MediaPlayer.Play(collision);
 
-                                    break;
-                                }
-                            }
-                        }
+                        Globals.currentState = Globals.EnStates.RETRY;
+                        Globals.flaga_DEAD = true;
                     }
-                    if (Globals.test_down < 29)
-                    {
-                        Globals.test_down++;
-                    }
-                    else
-                    {
-                        Globals.test_down = 0;
-                    }
-                }
-                if ((Keyboard.GetState().IsKeyDown(Keys.Right) && block_key == true) || Globals.test_right > 0)
-                {
-                    block_key = false;
-                    if (Globals.Animated_sprite != Globals.Animated_State.RIGHT)
-                    {
-                        Globals.Animated_sprite = Globals.Animated_State.RIGHT;
-                        check_animated();
-                    }
-
-                    position_X_pac += velocity_X_pac;
-                    pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
-                    foreach (Rectangle r in Globals.collisionList)
-                    {
-                        if (r.Intersects(pacman_bounds))
-                        {
-                            position_X_pac -= velocity_X_pac;
-                            pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
-                            break;
-                        }
-                    }
-                    foreach (Rectangle r in Globals.pointList_collision)
-                    {
-
-                        if (pacman_bounds.Intersects(r))
-                        {
-                            Globals.pointsList.Remove(r);
-                            foreach (Rectangle q in Globals.pointsList)
-                            {
-                                if (pacman_bounds.Intersects(q))
-                                {
-                                    Globals.index_for_score += 10;
-                                    Globals.pointsList.Remove(q);
-                                    MediaPlayer.Play(collision);
-
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    foreach (Rectangle r in Globals.portalsList)
-                    {
-                        if (pacman_bounds.Intersects(r))
-                        {
-                            position_X_pac = 30;
-                            break;
-                        }
-                    }
-                    if (Globals.test_right < 29)
-                    {
-                        Globals.test_right++;
-                    }
-                    else
-                    {
-                        Globals.test_right = 0;
-                    }
-                }
-                if ((Keyboard.GetState().IsKeyDown(Keys.Left) && block_key == true) || Globals.test_left > 0)
-                {
-                    block_key = false;
-                    if (Globals.Animated_sprite != Globals.Animated_State.LEFT)
-                    {
-                        Globals.Animated_sprite = Globals.Animated_State.LEFT;
-                        check_animated();
-                    }
-
-                    position_X_pac -= velocity_X_pac;
-                    pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
-                    foreach (Rectangle r in Globals.collisionList)
-                    {
-                        if (r.Intersects(pacman_bounds))
-                        {
-                            position_X_pac += velocity_X_pac;
-                            pacman_bounds = new Rectangle(position_X_pac, position_Y_pac, 30, 30);
-                            break;
-                        }
-                    }
-                    foreach (Rectangle r in Globals.pointList_collision)
-                    {
-
-                        if (pacman_bounds.Intersects(r))
-                        {
-                            Globals.pointsList.Remove(r);
-                            foreach (Rectangle q in Globals.pointsList)
-                            {
-                                if (pacman_bounds.Intersects(q))
-                                {
-                                    Globals.index_for_score += 10;
-                                    Globals.pointsList.Remove(q);
-                                    MediaPlayer.Play(collision);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    foreach (Rectangle r in Globals.portalsList)
-                    {
-                        if (pacman_bounds.Intersects(r))
-                        {
-                            position_X_pac = 540;
-                            break;
-                        }
-                    }
-                    if (Globals.test_left < 29)
-                    {
-                        Globals.test_left++;
-                    }
-                    else
-                    {
-                        Globals.test_left = 0;
-                    }
-                }
-                if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-                {
-                    Globals.currentState = Globals.EnStates.RETRY;
 
                 }
-
-            }
-            else
-            {
-                if (Globals.Animated_sprite != Globals.Animated_State.DEAD)
-                {
-                    Globals.Animated_sprite = Globals.Animated_State.DEAD;
-                    check_animated();
-
-                }
-                if (animated_packman.CurrentFrame == 9)
-                {
-
-
-                    Globals.currentState = Globals.EnStates.RETRY;
-                    Globals.flaga_DEAD = true;
-                }
-
-            }
-            Globals.spriteBatch.Begin();
-            animated_packman.Draw_for_pacman(pac_man_bounds);
-            Globals.spriteBatch.End();
+                Globals.spriteBatch.Begin();
+                animated_packman.Draw_for_pacman(pac_man_bounds);
+                Globals.spriteBatch.End();
         }
-       
 
         public void check_animated()
         {

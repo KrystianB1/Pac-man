@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-
+using Microsoft.Xna.Framework.Input;
 
 namespace Pac_man
 {
@@ -22,6 +22,7 @@ namespace Pac_man
         public static GraphicsDeviceManager graphics = null;
         public static Color highLight = new Color(255, 211, 5);
         public static Color normal = Color.Red;
+        public static KeyboardState keyboardState_save;
         public static List<Rectangle> collisionList = new List<Rectangle>();
         public static List<Rectangle> pointsList = new List<Rectangle>();
         public static List<Rectangle> pointList_collision = new List<Rectangle>();
