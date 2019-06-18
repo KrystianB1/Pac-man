@@ -26,7 +26,11 @@ namespace Pac_man
         public static List<Rectangle> collisionList = new List<Rectangle>();
         public static List<Rectangle> pointsList = new List<Rectangle>();
         public static List<Rectangle> pointList_collision = new List<Rectangle>();
+        public static List<Rectangle> powerupList_collision = new List<Rectangle>();
+        public static List<Rectangle> powerupList = new List<Rectangle>();
         public static List<Rectangle> portalsList = new List<Rectangle>();
+        public static Random rnd = new Random();
+        public static bool powered_up_check=false;
         public static int index_for_score = 0;
         public static bool mapdraw = false;
         public static EnStates currentState;

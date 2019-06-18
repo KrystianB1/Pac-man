@@ -21,6 +21,7 @@ namespace Pac_man
         Texture2D texture_in_gate;
         Texture2D texture_portal;
         Texture2D texture_point;
+        Texture2D texture_power_up;
         Texture2D texture_pac_up;
         Texture2D texture_pac_left;
         Texture2D texture_pac_right;
@@ -61,6 +62,7 @@ namespace Pac_man
             texture_gate = Globals.contentManager.Load<Texture2D>("gate");
             texture_in_gate = Globals.contentManager.Load<Texture2D>("in_gate");
             texture_portal = Globals.contentManager.Load<Texture2D>("portal");
+            texture_power_up=Globals.contentManager.Load<Texture2D>("power_up");
             start = Globals.contentManager.Load<Song>("wstep");
             stop = Globals.contentManager.Load<Song>("dead");
             pacman = new Pacman_main();
@@ -191,11 +193,20 @@ namespace Pac_man
                             location_bounds.Y = location.Y + 15;
                             if (Globals.mapdraw == false)
                             {
+                                
+                                int power = Globals.rnd.Next(1, 80);  
+                                if (power==40)
+                                {
+                                    Globals.spriteBatch.Draw(texture_power_up, location, Color.White);
+                                    Globals.powerupList.Add(location);
 
-
-                                Globals.spriteBatch.Draw(texture_point, location, Color.White);
-                                Globals.pointsList.Add(location);
-                                Globals.pointList_collision.Add(location_bounds);
+                                }
+                                else
+                                {
+                                    Globals.spriteBatch.Draw(texture_point, location, Color.White);
+                                    Globals.pointsList.Add(location);
+                                    Globals.pointList_collision.Add(location_bounds);
+                                }
 
                             }
                             else
@@ -205,6 +216,15 @@ namespace Pac_man
                                     if (rect.Contains(location))
                                     {                                     
                                         Globals.spriteBatch.Draw(texture_point, location, Color.White);
+
+                                        break;
+                                    }
+                                }
+                                foreach (Rectangle rect in Globals.powerupList)
+                                {
+                                    if (rect.Contains(location))
+                                    {
+                                        Globals.spriteBatch.Draw(texture_power_up, location, Color.White);
 
                                         break;
                                     }

@@ -143,7 +143,16 @@ namespace Pac_man
                                 break;
                             }
                         }
-                        if (Globals.test_up < 29)
+                    foreach (Rectangle r in Globals.powerupList)
+                    {
+                        if (pacman_bounds.Intersects(r))
+                        {
+                            Globals.powered_up_check = true;
+                            Globals.powerupList.Remove(r);
+                            break;
+                        }
+                    }
+                    if (Globals.test_up < 29)
                         {
                             Globals.test_up++;
                         }
@@ -184,6 +193,15 @@ namespace Pac_man
                                 break;
                             }
                         }
+                        foreach(Rectangle r in Globals.powerupList)
+                            {
+                        if (pacman_bounds.Intersects(r))
+                        {
+                            Globals.powered_up_check = true;
+                            Globals.powerupList.Remove(r);
+                            break;
+                        }
+                            }
                         if (Globals.test_down < 29)
                         {
                             Globals.test_down++;
@@ -233,7 +251,16 @@ namespace Pac_man
                                 break;
                             }
                         }
-                        if (Globals.test_right < 29)
+                    foreach (Rectangle r in Globals.powerupList)
+                    {
+                        if (pacman_bounds.Intersects(r))
+                        {
+                            Globals.powered_up_check = true;
+                            Globals.powerupList.Remove(r);
+                            break;
+                        }
+                    }
+                    if (Globals.test_right < 29)
                         {
                             Globals.test_right++;
                         }
@@ -280,7 +307,16 @@ namespace Pac_man
                                 break;
                             }
                         }
-                        if (Globals.test_left < 29)
+                    foreach (Rectangle r in Globals.powerupList)
+                    {
+                        if (pacman_bounds.Intersects(r))
+                        {
+                            Globals.powered_up_check = true;
+                            Globals.powerupList.Remove(r);
+                            break;
+                        }
+                    }
+                    if (Globals.test_left < 29)
                         {
                             Globals.test_left++;
                         }

@@ -58,6 +58,7 @@ namespace Pac_man
             {
                 Globals.pointsList.Clear();
                 Globals.pointList_collision.Clear();
+                Globals.powerupList.Clear();
                 Globals.mapdraw = false;
                 Globals.index_for_score = 0;
                 game = new Gameplay();
