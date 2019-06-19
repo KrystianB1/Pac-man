@@ -410,6 +410,18 @@
 /processorParam:TextureFormat=Color
 /build:monster/pac_up.png
 
+#begin pacman_eatfruit.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:pacman_eatfruit.mp3
+
+#begin pacman_eatghost.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:pacman_eatghost.mp3
+
 #begin point.png
 /importer:TextureImporter
 /processor:TextureProcessor

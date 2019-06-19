@@ -22,12 +22,13 @@ namespace Pac_man
         Texture2D texture_blue_right;
         Texture2D texture_blue_down;
 
-        Rectangle location;
+        public Rectangle location;
         Vector2 pink_vector_bounds;
         Rectangle pink_bounds;
 
-        int position_X_pac = 540;
-        int position_Y_pac = 30;
+        bool check_change = false;
+        public int position_X_pac = 540;
+        public int position_Y_pac = 30;
         const int velocity_X_pac = 1;
         const int velocity_Y_pac = 1;
 
@@ -64,6 +65,19 @@ namespace Pac_man
 
         public void Update()
         {
+            if (Globals.powered_up_check == true && check_change == false)
+            {
+                check_animated();
+                check_change = true;
+            }
+            else
+            {
+                if (Globals.powered_up_check == false && check_change == true)
+                {
+                    check_change = false;
+                    check_animated();
+                }
+            }
             Draw();
         }
 

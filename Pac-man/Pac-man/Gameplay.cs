@@ -37,7 +37,7 @@ namespace Pac_man
         Monster_orange orange;
         Monster_red red;
         Monster_pink pink;
-        Song start,stop;
+        Song start,stop,ghost;
         bool gamestart = true;
 
         //POSITION
@@ -65,6 +65,7 @@ namespace Pac_man
             texture_power_up=Globals.contentManager.Load<Texture2D>("power_up");
             start = Globals.contentManager.Load<Song>("wstep");
             stop = Globals.contentManager.Load<Song>("dead");
+            ghost = Globals.contentManager.Load<Song>("pacman_eatghost");
             pacman = new Pacman_main();
             cyan = new Monster_cyan();
             orange = new Monster_orange();
@@ -143,8 +144,56 @@ namespace Pac_man
                 pacman.Pacman_bounds.Intersects(red.Red_bounds)||
                 pacman.Pacman_bounds.Intersects(pink.Pink_bounds))
             {
-                Globals.flaga_STOP = true;
-                MediaPlayer.Play(stop);
+                if (Globals.powered_up_check == false)
+                {
+                    Globals.flaga_STOP = true;
+                    MediaPlayer.Play(stop);
+                }
+                else
+                {
+                    if(pacman.Pacman_bounds.Intersects(cyan.Cyan_bounds))
+                    {
+                        MediaPlayer.Play(ghost);
+                        cyan.position_X_pac =270;
+                        cyan.position_Y_pac =210;
+                        cyan.Update();
+                        Globals.index_for_score += 100;
+                    }
+                    else
+                    {
+                        if (pacman.Pacman_bounds.Intersects(orange.Orange_bounds))
+                        {
+                            MediaPlayer.Play(ghost);
+                            orange.position_X_pac = 270;
+                            orange.position_Y_pac = 210;
+                            orange.Update();
+                            Globals.index_for_score += 100;
+                        }
+                        else
+                        {
+                            if (pacman.Pacman_bounds.Intersects(red.Red_bounds))
+                            {
+                                MediaPlayer.Play(ghost);
+                                red.position_X_pac = 270;
+                                red.position_Y_pac = 210;
+                                red.Update();
+                                Globals.index_for_score += 100;
+                            }
+                            else
+                            {
+                                if (pacman.Pacman_bounds.Intersects(pink.Pink_bounds))
+                                {
+                                    MediaPlayer.Play(ghost);
+                                    pink.position_X_pac = 270;
+                                    pink.position_Y_pac= 210;
+                                    pink.Update();
+                                    Globals.index_for_score += 100;
+                                }
+                            }
+                        }
+                    }
+                    MediaPlayer.Play(ghost);
+                }
             }    
                 
             

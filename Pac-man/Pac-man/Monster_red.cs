@@ -22,24 +22,24 @@ namespace Pac_man
         Texture2D texture_blue_right;
         Texture2D texture_blue_down;
 
-        Rectangle location;
+       public Rectangle location;
         Vector2 red_vector_bounds;
         Rectangle red_bounds;
 
-        int position_X_pac = 30;
-        int position_Y_pac = 30;
+        public int position_X_pac = 30;
+        public int position_Y_pac = 30;
         const int velocity_X_pac = 1;
         const int velocity_Y_pac = 1;
-        
+        bool check_change = false;
 
-       
+
         public Monster_red()
         {
             texture_red_right = Globals.contentManager.Load<Texture2D>("monster/monster_red_right");
             texture_red_left = Globals.contentManager.Load<Texture2D>("monster/monster_red_left");
             texture_red_up = Globals.contentManager.Load<Texture2D>("monster/monster_red_up");
             texture_red_down = Globals.contentManager.Load<Texture2D>("monster/monster_red_down");
-
+            bool check_change = false;
 
             texture_blue_right = Globals.contentManager.Load<Texture2D>("monster/monster_blue_right");
             texture_blue_left = Globals.contentManager.Load<Texture2D>("monster/monster_blue_left");
@@ -67,6 +67,19 @@ namespace Pac_man
 
         public void Update()
         {
+            if (Globals.powered_up_check == true && check_change == false)
+            {
+                check_animated();
+                check_change = true;
+            }
+            else
+            {
+                if (Globals.powered_up_check == false && check_change == true)
+                {
+                    check_change = false;
+                    check_animated();
+                }
+            }
             Draw();
         }
 

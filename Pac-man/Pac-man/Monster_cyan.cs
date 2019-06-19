@@ -23,16 +23,16 @@ namespace Pac_man
         Texture2D texture_blue_right;
         Texture2D texture_blue_down;
 
-        Rectangle location;
+        public Rectangle location;
         Vector2 cyan_vector_bounds;
         Rectangle cyan_bounds;
 
-        int position_X_pac = 480;
-        int position_Y_pac = 480;
+       public  int position_X_pac = 480;
+       public  int position_Y_pac = 480;
         const int velocity_X_pac = 1;
         const int velocity_Y_pac = 1;
-        
-        
+        bool check_change = false;
+
         public Monster_cyan()
         {
             texture_cyan_right = Globals.contentManager.Load<Texture2D>("monster/monster_cyan_right");
@@ -53,6 +53,19 @@ namespace Pac_man
 
         public void Update()
         {
+            if (Globals.powered_up_check == true && check_change == false)
+            {
+                check_animated();
+                check_change = true;
+            }
+            else
+            {
+                if (Globals.powered_up_check == false && check_change == true)
+                {
+                    check_change = false;
+                    check_animated();
+                }
+            }
             Draw();
         }
 

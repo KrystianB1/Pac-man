@@ -68,6 +68,10 @@ namespace Pac_man
 
         public void Draw()
         {
+            if(DateTime.Now>Globals.start_date && Globals.start_date!=null)
+            {
+                Globals.powered_up_check = false;
+            }
             controll();
         }
 
@@ -149,6 +153,8 @@ namespace Pac_man
                         {
                             Globals.powered_up_check = true;
                             Globals.powerupList.Remove(r);
+                            Globals.start_date = DateTime.Now;
+                           Globals.start_date=Globals.start_date.AddSeconds(5);
                             break;
                         }
                     }
@@ -199,6 +205,8 @@ namespace Pac_man
                         {
                             Globals.powered_up_check = true;
                             Globals.powerupList.Remove(r);
+                            Globals.start_date = DateTime.Now;
+                            Globals.start_date = Globals.start_date.AddSeconds(5);
                             break;
                         }
                             }
@@ -257,6 +265,8 @@ namespace Pac_man
                         {
                             Globals.powered_up_check = true;
                             Globals.powerupList.Remove(r);
+                            Globals.start_date = DateTime.Now;
+                            Globals.start_date = Globals.start_date.AddSeconds(5);
                             break;
                         }
                     }
@@ -313,6 +323,8 @@ namespace Pac_man
                         {
                             Globals.powered_up_check = true;
                             Globals.powerupList.Remove(r);
+                            Globals.start_date = DateTime.Now;
+                            Globals.start_date = Globals.start_date.AddSeconds(5);
                             break;
                         }
                     }
